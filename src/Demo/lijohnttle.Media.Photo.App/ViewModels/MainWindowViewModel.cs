@@ -2,13 +2,9 @@
 using lijohnttle.Media.Photo.App.Events;
 using lijohnttle.Media.Photo.App.Models;
 using lijohnttle.Media.Photo.App.ViewModels.Common;
-using lijohnttle.Media.Photo.App.ViewModels.Filters;
 using lijohnttle.Media.Photo.Core;
 using lijohnttle.Media.Photo.Wpf.Extensions;
-using System;
-using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -17,7 +13,6 @@ namespace lijohnttle.Media.Photo.App.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
-        private readonly IMessenger messenger;
         private readonly IImageProcessor imageProcessor;
         private IImage originalImage;
 
@@ -27,7 +22,6 @@ namespace lijohnttle.Media.Photo.App.ViewModels
             SelectImageCommand = new SelectImageCommand(messenger);
             RenderCommand = new DelegateCommand(Render, CanRender);
             this.imageProcessor = imageProcessor;
-            this.messenger = messenger;
             FiltersList = new FiltersListViewModel(messenger);
 
             messenger.Subscribe<ImageFileSelectedEvent>(OnImageFileSelected);
