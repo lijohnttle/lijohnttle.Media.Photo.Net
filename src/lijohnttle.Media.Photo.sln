@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lijohnttle.Media.Photo.App"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Demo", "Demo", "{9B7CB777-4B8B-4822-86B9-DB48E0B74A88}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lijohnttle.Media.Photo.Filters", "lijohnttle.Media.Photo.Filters\lijohnttle.Media.Photo.Filters.csproj", "{8DDB54D5-CFE7-4A86-B07C-89089E9297CC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,10 @@ Global
 		{4F4AC0E2-49EA-42D7-9482-3BA2F797927F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F4AC0E2-49EA-42D7-9482-3BA2F797927F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F4AC0E2-49EA-42D7-9482-3BA2F797927F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DDB54D5-CFE7-4A86-B07C-89089E9297CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DDB54D5-CFE7-4A86-B07C-89089E9297CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DDB54D5-CFE7-4A86-B07C-89089E9297CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DDB54D5-CFE7-4A86-B07C-89089E9297CC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
