@@ -77,8 +77,9 @@ namespace lijohnttle.Media.Photo.App.ViewModels
             }
 
             BitmapSource bitmapSource = new System.Windows.Media.Imaging.BitmapImage(new System.Uri(fileName));
+            WriteableBitmap writeableBitmap = new WriteableBitmap(bitmapSource);
 
-            originalImage = bitmapSource.ConvertToImage();
+            originalImage = writeableBitmap.ConvertToImage();
 
             Render();
         }
