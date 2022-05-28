@@ -1,7 +1,6 @@
 ﻿using lijohnttle.Media.Photo.App.Events;
 using lijohnttle.Media.Photo.App.ViewModels.Common;
-using lijohnttle.Media.Photo.Core;
-using lijohnttle.Media.Photo.Filters.Extensions;
+using lijohnttle.Media.Photo.Filters;
 using lijohnttle.Media.Photo.Filters.Median;
 using System.Windows.Input;
 
@@ -30,12 +29,15 @@ namespace lijohnttle.Media.Photo.App.ViewModels.Filters
             set => SetPropertyValue(nameof(WindowSize), value);
         }
 
-        public override IImage ApplyFilter(IImage image)
+        public override IImageFilter BuildFilter()
         {
-            return image.ApplyMedianFilter(new MedianFilterOptions
+            return new MedianFilter
             {
-                WindowSize = WindowSize
-            });
+                Options = new MedianFilterOptions
+                {
+                    WindowSize = WindowSize
+                }
+            };
         }
 
         private bool CanDecreaseWindowSize()

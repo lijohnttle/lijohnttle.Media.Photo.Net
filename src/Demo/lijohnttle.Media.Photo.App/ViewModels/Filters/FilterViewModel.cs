@@ -1,6 +1,6 @@
 ﻿using lijohnttle.Media.Photo.App.Events;
 using lijohnttle.Media.Photo.App.ViewModels.Common;
-using lijohnttle.Media.Photo.Core;
+using lijohnttle.Media.Photo.Filters;
 using System.Windows.Input;
 
 namespace lijohnttle.Media.Photo.App.ViewModels.Filters
@@ -19,6 +19,6 @@ namespace lijohnttle.Media.Photo.App.ViewModels.Filters
 
         public IMessenger Messenger { get; }
 
-        public abstract IImage ApplyFilter(IImage image);
+        public abstract IImageFilter BuildFilter();
     }
 }

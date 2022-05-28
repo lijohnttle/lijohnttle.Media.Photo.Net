@@ -1,4 +1,5 @@
 ﻿using lijohnttle.Media.Photo.Core;
+using lijohnttle.Media.Photo.Filters;
 using System.ComponentModel;
 using System.Windows.Input;
 
@@ -10,6 +11,6 @@ namespace lijohnttle.Media.Photo.App.ViewModels.Filters
 
         string Title { get; }
 
-        IImage ApplyFilter(IImage image);
+        IImageFilter BuildFilter();
     }
 }

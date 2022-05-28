@@ -15,6 +15,8 @@
     d:DataContext="{d:DesignInstance Type={x:Type viewmodels:MainWindowViewModel}}">
 
     <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+
         <DataTemplate DataType="{x:Type filters:MedianFilterViewModel}">
             <filters1:MedianFilterView />
         </DataTemplate>
@@ -36,6 +38,11 @@
 
         <Grid>
             <Image Source="{Binding Image}" Stretch="Uniform" />
+
+            <Rectangle
+                Fill="White"
+                Opacity="0.5"
+                Visibility="{Binding IsProcessing, Converter={StaticResource BooleanToVisibilityConverter}}" />
         </Grid>
 
         <Grid Grid.Column="2">
@@ -60,20 +67,20 @@
                     <ItemsControl ItemsSource="{Binding Filters}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Expander Header="{Binding Title}" IsExpanded="True" Margin="0,8">
-                                    <Border Margin="8" BorderThickness="1" BorderBrush="Silver">
-                                        <StackPanel Margin="8">
-                                            <ContentPresenter Content="{Binding}" />
+                                <Border Margin="8" BorderThickness="1" BorderBrush="Silver">
+                                    <StackPanel Margin="8">
+                                        <TextBlock Text="{Binding Title}" FontWeight="SemiBold" Margin="0,0,0,8" />
 
-                                            <Button
-                                                Margin="0,8,0,0"
-                                                HorizontalAlignment="Right"
-                                                Command="{Binding DeleteCommand}">
-                                                Delete
-                                            </Button>
-                                        </StackPanel>
-                                    </Border>
-                                </Expander>
+                                        <ContentPresenter Content="{Binding}" />
+
+                                        <Button
+                                            Margin="0,8,0,0"
+                                            HorizontalAlignment="Right"
+                                            Command="{Binding DeleteCommand}">
+                                            Delete
+                                        </Button>
+                                    </StackPanel>
+                                </Border>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
