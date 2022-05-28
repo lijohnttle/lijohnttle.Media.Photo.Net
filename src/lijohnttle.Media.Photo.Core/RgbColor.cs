@@ -9,12 +9,12 @@ namespace lijohnttle.Media.Photo.Core
     public struct RgbColor : IColor, IEquatable<RgbColor>
     {
         private readonly float alpha;
-        private readonly int red;
-        private readonly int green;
-        private readonly int blue;
+        private readonly byte red;
+        private readonly byte green;
+        private readonly byte blue;
 
 
-        public RgbColor(int red, int green, int blue, float alpha = 1)
+        public RgbColor(byte red, byte green, byte blue, float alpha = 1)
             : this()
         {
             Red = red;
@@ -27,7 +27,7 @@ namespace lijohnttle.Media.Photo.Core
         /// <summary>
         /// Gets the red component of a color;
         /// </summary>
-        public int Red
+        public byte Red
         {
             get => red;
             init
@@ -41,7 +41,7 @@ namespace lijohnttle.Media.Photo.Core
         /// <summary>
         /// Gets the green component of a color.
         /// </summary>
-        public int Green
+        public byte Green
         {
             get => green;
             init
@@ -55,7 +55,7 @@ namespace lijohnttle.Media.Photo.Core
         /// <summary>
         /// Gets the blue component of a color.
         /// </summary>
-        public int Blue
+        public byte Blue
         {
             get => blue;
             init
