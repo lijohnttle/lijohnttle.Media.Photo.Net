@@ -1,6 +1,7 @@
 ﻿using lijohnttle.Media.Photo.Core;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace lijohnttle.Media.Photo.Filters.Median
 {
@@ -46,13 +47,10 @@ namespace lijohnttle.Media.Photo.Filters.Median
 
         private void IteratePixels(IImage image, int filterOffset, Action<int, int> action)
         {
-            for (int y = filterOffset; y < image.Height - filterOffset; y++)
+            Parallel.For(filterOffset, image.Height - filterOffset - 1, y =>
             {
-                for (int x = filterOffset; x < image.Width - filterOffset; x++)
-                {
-                    action(x, y);
-                }
-            }
+                Parallel.For(filterOffset, image.Width - filterOffset - 1, x => action(x, y));
+            });
         }
 
         private void IterateWindow(int filterOffset, Action<int, int> action)

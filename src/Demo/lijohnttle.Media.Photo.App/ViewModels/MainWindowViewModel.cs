@@ -25,20 +25,16 @@ namespace lijohnttle.Media.Photo.App.ViewModels
         public MainWindowViewModel(IImageProcessor imageProcessor, IMessenger messenger)
         {
             SelectImageCommand = new SelectImageCommand(messenger);
-            AddMedianFilterCommand = new DelegateCommand(AddMedianFilter);
             RenderCommand = new DelegateCommand(Render, CanRender);
-            Filters = new ObservableCollection<IFilterViewModel>();
             this.imageProcessor = imageProcessor;
             this.messenger = messenger;
+            FiltersList = new FiltersListViewModel(messenger);
 
             messenger.Subscribe<ImageFileSelectedEvent>(OnImageFileSelected);
-            messenger.Subscribe<DeleteFilterEvent>(OnDeleteFilter);
         }
 
         
         public ICommand SelectImageCommand { get; }
-
-        public ICommand AddMedianFilterCommand { get; }
 
         public ICommand RenderCommand { get; }
 
@@ -66,7 +62,7 @@ namespace lijohnttle.Media.Photo.App.ViewModels
             set => SetPropertyValue(nameof(IsProcessing), value);
         }
 
-        public ObservableCollection<IFilterViewModel> Filters { get; }
+        public FiltersListViewModel FiltersList { get; }
 
 
         private void LoadImage(string fileName)
@@ -89,16 +85,6 @@ namespace lijohnttle.Media.Photo.App.ViewModels
             ImageFileName = message.FileName;
         }
 
-        private void OnDeleteFilter(DeleteFilterEvent message)
-        {
-            Filters.Remove(message.Filter);
-        }
-
-        private void AddMedianFilter()
-        {
-            Filters.Add(new MedianFilterViewModel(messenger));
-        }
-
         private async void Render()
         {
             if (originalImage == null)
@@ -109,11 +95,13 @@ namespace lijohnttle.Media.Photo.App.ViewModels
 
             IsProcessing = true;
 
-            IImage image = await imageProcessor.ProcessImageAsync(originalImage, Filters.Select(t => t.BuildFilter()).ToList());
+            IImage image = await imageProcessor.ProcessImageAsync(originalImage, FiltersList.BuildFilters());
 
             Image = image.ConvertToBitmapSource();
 
             IsProcessing = false;
+
+            CommandManager.InvalidateRequerySuggested();
         }
 
         private bool CanRender() => !IsProcessing;

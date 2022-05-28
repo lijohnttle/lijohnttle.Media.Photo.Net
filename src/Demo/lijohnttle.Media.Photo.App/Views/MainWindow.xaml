@@ -8,6 +8,7 @@
     xmlns:filters="clr-namespace:lijohnttle.Media.Photo.App.ViewModels.Filters"
     xmlns:behaviors="clr-namespace:lijohnttle.Media.Photo.App.Behaviors"
     xmlns:filters1="clr-namespace:lijohnttle.Media.Photo.App.Views.Filters"
+    xmlns:views="clr-namespace:lijohnttle.Media.Photo.App.Views"
     mc:Ignorable="d"
     Title="MainWindow"
     Height="450"
@@ -64,26 +65,7 @@
                         </Button>
                     </Grid>
 
-                    <ItemsControl ItemsSource="{Binding Filters}">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Border Margin="8" BorderThickness="1" BorderBrush="Silver">
-                                    <StackPanel Margin="8">
-                                        <TextBlock Text="{Binding Title}" FontWeight="SemiBold" Margin="0,0,0,8" />
-
-                                        <ContentPresenter Content="{Binding}" />
-
-                                        <Button
-                                            Margin="0,8,0,0"
-                                            HorizontalAlignment="Right"
-                                            Command="{Binding DeleteCommand}">
-                                            Delete
-                                        </Button>
-                                    </StackPanel>
-                                </Border>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
+                    <views:FiltersListView DataContext="{Binding FiltersList}" />
 
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                         <Button x:Name="AddEffectButton" Margin="8" behaviors:ShowContextMenuOnClick.IsEnabled="True">
@@ -93,7 +75,7 @@
                                     DataContext="{Binding RelativeSource={RelativeSource Self}, Path=PlacementTarget.DataContext}"
                                     d:DataContext="{d:DesignInstance Type={x:Type viewmodels:MainWindowViewModel}}">
                                     <MenuItem Header="Filter">
-                                        <MenuItem Header="Median Filter" Command="{Binding AddMedianFilterCommand}" />
+                                        <MenuItem Header="Median Filter" Command="{Binding FiltersList.AddMedianFilterCommand}" />
                                     </MenuItem>
                                 </ContextMenu>
                             </Button.ContextMenu>
