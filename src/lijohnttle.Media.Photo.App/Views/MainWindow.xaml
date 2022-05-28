@@ -9,8 +9,6 @@
     Title="MainWindow"
     Height="450"
     Width="800"
-    Background="#191919"
-    Foreground="White"
     d:DataContext="{d:DesignInstance Type={x:Type viewmodels:MainWindowViewModel}, IsDesignTimeCreatable=False}">
     
     <Grid>
@@ -22,14 +20,31 @@
 
         <GridSplitter
             Grid.Column="1"
-            Background="#595959"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
             ResizeDirection="Columns"
             ResizeBehavior="PreviousAndNext" />
 
-        <Grid Grid.Column="2" Background="#313131">
-            
+        <Grid>
+            <Image Source="{Binding Path=Image}" />
+        </Grid>
+
+        <Grid Grid.Column="2">
+            <StackPanel Orientation="Vertical">
+                <TextBlock Margin="8,24,8,8" FontWeight="SemiBold">Image</TextBlock>
+                
+                <Grid Margin="8,0,8,8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="8" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBox IsReadOnly="True" Text="{Binding Path=ImageFileName}" />
+
+                    <Button Grid.Column="2" Width="32" Content="..." Command="{Binding Path=SelectImageCommand}" />
+                </Grid>
+            </StackPanel>
         </Grid>
     </Grid>
 </Window>

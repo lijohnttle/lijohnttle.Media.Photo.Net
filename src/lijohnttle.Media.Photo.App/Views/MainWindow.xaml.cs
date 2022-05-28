@@ -1,4 +1,5 @@
-﻿using lijohnttle.Media.Photo.App.ViewModels;
+﻿using lijohnttle.Media.Photo.App.Events;
+using lijohnttle.Media.Photo.App.ViewModels;
 using System.Windows;
 
 namespace lijohnttle.Media.Photo.App.Views
@@ -9,7 +10,7 @@ namespace lijohnttle.Media.Photo.App.Views
         {
             InitializeComponent();
 
-            DataContext = new MainWindowViewModel();
+            DataContext = new MainWindowViewModel(new Messenger());
         }
     }
 }
