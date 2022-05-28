@@ -7,13 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "lijohnttle.Media.Photo.Core
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "lijohnttle.Media.Photo.Core.UnitTests", "lijohnttle.Media.Photo.Core.UnitTests\lijohnttle.Media.Photo.Core.UnitTests.csproj", "{9A361B10-2BE0-493A-9315-B1ECBD6C6F91}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "lijohnttle.Media.Photo.App", "lijohnttle.Media.Photo.App\lijohnttle.Media.Photo.App.csproj", "{4F4AC0E2-49EA-42D7-9482-3BA2F797927F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "lijohnttle.Media.Photo.App", "Demo\lijohnttle.Media.Photo.App\lijohnttle.Media.Photo.App.csproj", "{4F4AC0E2-49EA-42D7-9482-3BA2F797927F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Demo", "Demo", "{9B7CB777-4B8B-4822-86B9-DB48E0B74A88}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "lijohnttle.Media.Photo.Filters", "lijohnttle.Media.Photo.Filters\lijohnttle.Media.Photo.Filters.csproj", "{8DDB54D5-CFE7-4A86-B07C-89089E9297CC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lijohnttle.Media.Photo.Wpf", "lijohnttle.Media.Photo.Wpf\lijohnttle.Media.Photo.Wpf.csproj", "{9864DCAB-9B7F-4FB6-B9B5-6E01AB388806}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lijohnttle.Media.Photo.Wpf", "Demo\lijohnttle.Media.Photo.Wpf\lijohnttle.Media.Photo.Wpf.csproj", "{9864DCAB-9B7F-4FB6-B9B5-6E01AB388806}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
