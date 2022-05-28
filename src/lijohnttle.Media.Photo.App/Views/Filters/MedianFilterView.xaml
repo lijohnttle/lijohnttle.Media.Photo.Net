@@ -1,0 +1,38 @@
+﻿<UserControl
+    x:Class="lijohnttle.Media.Photo.App.Views.Filters.MedianFilterView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:filters="clr-namespace:lijohnttle.Media.Photo.App.ViewModels.Filters"
+    mc:Ignorable="d"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    d:DataContext="{d:DesignInstance Type=filters:MedianFilterViewModel}">
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="8" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        
+        <TextBlock Text="Window Size" />
+
+        <Grid Grid.Column="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="8" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="8" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <Button Command="{Binding DecreaseWindowSizeCommand}" Width="32">-</Button>
+            
+            <TextBox Grid.Column="2" IsReadOnly="True" Text="{Binding WindowSize}" TextAlignment="Center" />
+            
+            <Button Grid.Column="4" Command="{Binding IncreaseWindowSizeCommand}" Width="32">+</Button>
+        </Grid>
+    </Grid>
+</UserControl>

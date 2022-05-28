@@ -10,6 +10,7 @@ namespace lijohnttle.Media.Photo.Filters.Median
         public MedianFilterOptions()
         {
             WindowSize = 3;
+            PixelComparer = MedianFilterPixelComparer.Default;
         }
 
         public MedianFilterPixelComparer PixelComparer

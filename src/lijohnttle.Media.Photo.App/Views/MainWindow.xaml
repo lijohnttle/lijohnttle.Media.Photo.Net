@@ -5,11 +5,20 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewmodels="clr-namespace:lijohnttle.Media.Photo.App.ViewModels"
+    xmlns:filters="clr-namespace:lijohnttle.Media.Photo.App.ViewModels.Filters"
+    xmlns:behaviors="clr-namespace:lijohnttle.Media.Photo.App.Behaviors"
+    xmlns:filters1="clr-namespace:lijohnttle.Media.Photo.App.Views.Filters"
     mc:Ignorable="d"
     Title="MainWindow"
     Height="450"
     Width="800"
-    d:DataContext="{d:DesignInstance Type={x:Type viewmodels:MainWindowViewModel}, IsDesignTimeCreatable=False}">
+    d:DataContext="{d:DesignInstance Type={x:Type viewmodels:MainWindowViewModel}}">
+
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type filters:MedianFilterViewModel}">
+            <filters1:MedianFilterView />
+        </DataTemplate>
+    </Window.Resources>
     
     <Grid>
         <Grid.ColumnDefinitions>
@@ -26,25 +35,59 @@
             ResizeBehavior="PreviousAndNext" />
 
         <Grid>
-            <Image Source="{Binding Path=Image}" />
+            <Image Source="{Binding Image}" Stretch="Uniform" />
         </Grid>
 
         <Grid Grid.Column="2">
-            <StackPanel Orientation="Vertical">
-                <TextBlock Margin="8,24,8,8" FontWeight="SemiBold">Image</TextBlock>
+            <ScrollViewer>
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Margin="8,24,8,8" FontWeight="SemiBold">Image</TextBlock>
                 
-                <Grid Margin="8,0,8,8">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="8" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
+                    <Grid Margin="8,0,8,8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="8" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
 
-                    <TextBox IsReadOnly="True" Text="{Binding Path=ImageFileName}" />
+                        <TextBox IsReadOnly="True" Text="{Binding ImageFileName}" />
 
-                    <Button Grid.Column="2" Width="32" Content="..." Command="{Binding Path=SelectImageCommand}" />
-                </Grid>
-            </StackPanel>
+                        <Button Grid.Column="2" Width="32" Command="{Binding SelectImageCommand}">
+                            ...
+                        </Button>
+                    </Grid>
+
+                    <ItemsControl ItemsSource="{Binding Filters}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Expander Header="{Binding Title}" IsExpanded="True" Margin="0,8">
+                                    <StackPanel>
+                                        <ContentPresenter Content="{Binding}" Margin="8" />
+                                    </StackPanel>
+                                </Expander>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                    <Button x:Name="AddEffectButton" Margin="8" behaviors:ShowContextMenuOnClick.IsEnabled="True">
+                        <Button.ContextMenu>
+                            <ContextMenu
+                                Placement="Bottom"
+                                DataContext="{Binding RelativeSource={RelativeSource Self}, Path=PlacementTarget.DataContext}"
+                                d:DataContext="{d:DesignInstance Type={x:Type viewmodels:MainWindowViewModel}}">
+                                <MenuItem Header="Filter">
+                                    <MenuItem Header="Median Filter" Command="{Binding AddMedianFilterCommand}" />
+                                </MenuItem>
+                            </ContextMenu>
+                        </Button.ContextMenu>
+                        Add...
+                    </Button>
+
+                    <Button Margin="8" Command="{Binding RenderCommand}">
+                        Render
+                    </Button>
+                </StackPanel>
+            </ScrollViewer>
         </Grid>
     </Grid>
 </Window>

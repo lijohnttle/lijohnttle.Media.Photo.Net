@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\lijohnttle.Media.Photo.Core\lijohnttle.Media.Photo.Core.csproj" />
+    <ProjectReference Include="..\lijohnttle.Media.Photo.Filters\lijohnttle.Media.Photo.Filters.csproj" />
   </ItemGroup>
 
 </Project>
