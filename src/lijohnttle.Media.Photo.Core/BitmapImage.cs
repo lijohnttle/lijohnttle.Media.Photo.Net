@@ -4,29 +4,42 @@ namespace lijohnttle.Media.Photo.Core
 {
     public class BitmapImage : IImage
     {
-        private readonly RgbColor[] data;
+        private readonly RgbColor[,] data;
 
-        public BitmapImage(RgbColor[] data, int imageWidth, int imageHeight)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data">Array of pixels. First dimention are columns, second dimention are rows</param>
+        public BitmapImage(RgbColor[,] data)
         {
-            ImageVerificationHelper.VerifyImageSizeAndDataAreConsistent(imageWidth, imageHeight, data.Length);
-
             this.data = data;
-            Width = imageWidth;
-            Height = imageHeight;
         }
 
-        public int Width { get; }
+        public BitmapImage(IImage image)
+        {
+            RgbColor[,] data = new RgbColor[image.Width, image.Height];
 
-        public int Height { get; }
+            for (int x = 0; x < image.Width; x++)
+            {
+                for (int y = 0; y < image.Height; y++)
+                {
+                    data[x, y] = image.GetPixelColor(x, y).AsRgbColor();
+                }
+            }
+
+            this.data = data;
+        }
+
+        public int Width => data.GetLength(0);
+
+        public int Height => data.GetLength(1);
 
         public IColor GetPixelColor(int x, int y)
         {
             ImageVerificationHelper.VerifyXCoordinate(x, Width);
             ImageVerificationHelper.VerifyYCoordinate(y, Height);
 
-            int index = Width * y + x;
-
-            return data[index];
+            return data[x, y];
         }
     }
 }
