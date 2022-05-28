@@ -4,11 +4,9 @@ using lijohnttle.Media.Photo.App.ViewModels.Common;
 using lijohnttle.Media.Photo.App.ViewModels.Filters;
 using lijohnttle.Media.Photo.Core;
 using lijohnttle.Media.Photo.Wpf.Extensions;
-using System.Collections.Generic;
+using System;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
-using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -17,7 +15,8 @@ namespace lijohnttle.Media.Photo.App.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
-        private IImage _originalImage;
+        private readonly IMessenger messenger;
+        private IImage originalImage;
 
 
         public MainWindowViewModel(IMessenger messenger)
@@ -28,8 +27,9 @@ namespace lijohnttle.Media.Photo.App.ViewModels
             Filters = new ObservableCollection<IFilterViewModel>();
 
             messenger.Subscribe<ImageFileSelectedEvent>(OnImageFileSelected);
+            messenger.Subscribe<DeleteFilterEvent>(OnDeleteFilter);
+            this.messenger = messenger;
         }
-
 
         public ICommand SelectImageCommand { get; }
 
@@ -67,7 +67,7 @@ namespace lijohnttle.Media.Photo.App.ViewModels
 
             BitmapSource bitmapSource = new System.Windows.Media.Imaging.BitmapImage(new System.Uri(fileName));
 
-            _originalImage = bitmapSource.ConvertToImage();
+            originalImage = bitmapSource.ConvertToImage();
 
             Render();
         }
@@ -77,24 +77,29 @@ namespace lijohnttle.Media.Photo.App.ViewModels
             ImageFileName = message.FileName;
         }
 
+        private void OnDeleteFilter(DeleteFilterEvent message)
+        {
+            Filters.Remove(message.Filter);
+        }
+
         private void AddMedianFilter()
         {
-            Filters.Add(new MedianFilterViewModel());
+            Filters.Add(new MedianFilterViewModel(messenger));
         }
 
         private void Render()
         {
-            if (_originalImage == null)
+            if (originalImage == null)
             {
                 Image = null;
                 return;
             }
 
-            IImage image = _originalImage;
+            IImage image = originalImage;
 
             foreach (IFilterViewModel filterViewModel in Filters)
             {
-                image = filterViewModel.ApplyFilter(_originalImage);
+                image = filterViewModel.ApplyFilter(originalImage);
             }
 
             Image = image.ConvertToBitmapSource();

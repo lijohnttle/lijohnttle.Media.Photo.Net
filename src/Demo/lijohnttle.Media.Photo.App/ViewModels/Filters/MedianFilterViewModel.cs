@@ -1,4 +1,5 @@
-﻿using lijohnttle.Media.Photo.App.ViewModels.Common;
+﻿using lijohnttle.Media.Photo.App.Events;
+using lijohnttle.Media.Photo.App.ViewModels.Common;
 using lijohnttle.Media.Photo.Core;
 using lijohnttle.Media.Photo.Filters.Extensions;
 using lijohnttle.Media.Photo.Filters.Median;
@@ -6,9 +7,10 @@ using System.Windows.Input;
 
 namespace lijohnttle.Media.Photo.App.ViewModels.Filters
 {
-    public class MedianFilterViewModel : ViewModelBase, IFilterViewModel
+    public class MedianFilterViewModel : FilterViewModel
     {
-        public MedianFilterViewModel()
+        public MedianFilterViewModel(IMessenger messenger)
+            : base(messenger)
         {
             WindowSize = 3;
 
@@ -20,7 +22,7 @@ namespace lijohnttle.Media.Photo.App.ViewModels.Filters
 
         public ICommand DecreaseWindowSizeCommand { get; }
 
-        public string Title => "Median Filter";
+        public override string Title { get; } = "Median Filter";
 
         public int WindowSize
         {
@@ -28,7 +30,7 @@ namespace lijohnttle.Media.Photo.App.ViewModels.Filters
             set => SetPropertyValue(nameof(WindowSize), value);
         }
 
-        public IImage ApplyFilter(IImage image)
+        public override IImage ApplyFilter(IImage image)
         {
             return image.ApplyMedianFilter(new MedianFilterOptions
             {

@@ -61,31 +61,42 @@
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Expander Header="{Binding Title}" IsExpanded="True" Margin="0,8">
-                                    <StackPanel>
-                                        <ContentPresenter Content="{Binding}" Margin="8" />
-                                    </StackPanel>
+                                    <Border Margin="8" BorderThickness="1" BorderBrush="Silver">
+                                        <StackPanel Margin="8">
+                                            <ContentPresenter Content="{Binding}" />
+
+                                            <Button
+                                                Margin="0,8,0,0"
+                                                HorizontalAlignment="Right"
+                                                Command="{Binding DeleteCommand}">
+                                                Delete
+                                            </Button>
+                                        </StackPanel>
+                                    </Border>
                                 </Expander>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
 
-                    <Button x:Name="AddEffectButton" Margin="8" behaviors:ShowContextMenuOnClick.IsEnabled="True">
-                        <Button.ContextMenu>
-                            <ContextMenu
-                                Placement="Bottom"
-                                DataContext="{Binding RelativeSource={RelativeSource Self}, Path=PlacementTarget.DataContext}"
-                                d:DataContext="{d:DesignInstance Type={x:Type viewmodels:MainWindowViewModel}}">
-                                <MenuItem Header="Filter">
-                                    <MenuItem Header="Median Filter" Command="{Binding AddMedianFilterCommand}" />
-                                </MenuItem>
-                            </ContextMenu>
-                        </Button.ContextMenu>
-                        Add...
-                    </Button>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button x:Name="AddEffectButton" Margin="8" behaviors:ShowContextMenuOnClick.IsEnabled="True">
+                            <Button.ContextMenu>
+                                <ContextMenu
+                                    Placement="Bottom"
+                                    DataContext="{Binding RelativeSource={RelativeSource Self}, Path=PlacementTarget.DataContext}"
+                                    d:DataContext="{d:DesignInstance Type={x:Type viewmodels:MainWindowViewModel}}">
+                                    <MenuItem Header="Filter">
+                                        <MenuItem Header="Median Filter" Command="{Binding AddMedianFilterCommand}" />
+                                    </MenuItem>
+                                </ContextMenu>
+                            </Button.ContextMenu>
+                            Add...
+                        </Button>
 
-                    <Button Margin="8" Command="{Binding RenderCommand}">
-                        Render
-                    </Button>
+                        <Button Margin="8" Command="{Binding RenderCommand}">
+                            Render
+                        </Button>
+                    </StackPanel>
                 </StackPanel>
             </ScrollViewer>
         </Grid>
