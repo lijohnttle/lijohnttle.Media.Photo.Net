@@ -1,15 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\lijohnttle.Media.Photo.Core\lijohnttle.Media.Photo.Core.csproj" />
-    <ProjectReference Include="..\lijohnttle.Media.Photo.Filters\lijohnttle.Media.Photo.Filters.csproj" />
-    <ProjectReference Include="..\lijohnttle.Media.Photo.Wpf\lijohnttle.Media.Photo.Wpf.csproj" />
   </ItemGroup>
 
 </Project>
