@@ -15,6 +15,7 @@ namespace lijohnttle.Media.Photo.App.ViewModels.Filters
             SmoothingFilterTypeList = new ObservableCollection<CartoonSmoothingFilterType>(
                 Enum.GetValues<CartoonSmoothingFilterType>());
             SmoothingFilterType = CartoonSmoothingFilterType.Median3x3;
+            OutlineStrength = 255;
         }
 
         public override string Title { get; } = "Cartoon Filter";
@@ -33,6 +34,12 @@ namespace lijohnttle.Media.Photo.App.ViewModels.Filters
 
         public ObservableCollection<CartoonSmoothingFilterType> SmoothingFilterTypeList { get; }
 
+        public byte OutlineStrength
+        {
+            get => GetPropertyValue<byte>(nameof(OutlineStrength));
+            set => SetPropertyValue(nameof(OutlineStrength), value);
+        }
+
         public override IImageFilter BuildFilter()
         {
             return new CartoonFilter
@@ -41,6 +48,7 @@ namespace lijohnttle.Media.Photo.App.ViewModels.Filters
                 {
                     Threshold = Threshold,
                     SmoothingFilterType = SmoothingFilterType,
+                    OutlineStrength = OutlineStrength,
                 }
             };
         }

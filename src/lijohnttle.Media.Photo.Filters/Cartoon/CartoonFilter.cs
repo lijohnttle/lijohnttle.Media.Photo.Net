@@ -24,6 +24,8 @@ namespace lijohnttle.Media.Photo.Filters.Cartoon
             IImage smoothedImage = smoothingFilter.Apply(image);
             IImage result = new BitmapImage(smoothedImage);
 
+            double outlineMultiplier = (255 - Options.OutlineStrength) / 255.0;
+
             IteratePixels(smoothedImage, (x, y) =>
             {
                 int gradientValue = ComputeGradientValue(smoothedImage, x, y);
@@ -43,9 +45,9 @@ namespace lijohnttle.Media.Photo.Filters.Cartoon
                 {
                     //pixel = new RgbColor(0, 0, 0);
                     pixel = new RgbColor(
-                        (byte)(pixel.Red / 2),
-                        (byte)(pixel.Green / 2),
-                        (byte)(pixel.Blue / 2));
+                        (byte)(pixel.Red * outlineMultiplier),
+                        (byte)(pixel.Green * outlineMultiplier),
+                        (byte)(pixel.Blue * outlineMultiplier));
                 }
 
                 result.SetPixel(x, y, pixel);

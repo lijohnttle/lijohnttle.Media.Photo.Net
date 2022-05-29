@@ -20,18 +20,32 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="8" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="8" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <TextBlock Text="Threshold" />
 
         <TextBox Grid.Column="2" Text="{Binding Threshold, Mode=TwoWay}" TextAlignment="Center" />
 
-        <TextBlock Grid.Row="2" Text="Type" />
+        <TextBlock Grid.Row="2" Text="Smoothing Type" />
 
         <ComboBox
             Grid.Column="2"
             Grid.Row="2"
             SelectedItem="{Binding SmoothingFilterType, Mode=TwoWay}"
             ItemsSource="{Binding SmoothingFilterTypeList}" />
+
+
+        <TextBlock Grid.Row="4" Text="Outline Strength" />
+
+        <Slider
+            Grid.Column="2"
+            Grid.Row="4"
+            Value="{Binding OutlineStrength, Mode=TwoWay}"
+            Minimum="0"
+            Maximum="255"
+            SmallChange="1"
+            LargeChange="8" />
     </Grid>
 </UserControl>
