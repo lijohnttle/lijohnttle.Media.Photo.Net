@@ -36,7 +36,7 @@ namespace lijohnttle.Media.Photo.Filters.Median
 
                 neighbourPixels.Sort(options.PixelComparer);
 
-                IColor middlePixel = neighbourPixels[filterOffset];
+                IColor middlePixel = neighbourPixels[neighbourPixels.Count / 2];
 
                 result.SetPixel(x, y, middlePixel);
             });
