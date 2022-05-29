@@ -24,13 +24,13 @@ namespace lijohnttle.Media.Photo.Core.UnitTests
 
             var image = new BitmapImage(data);
 
-            Assert.AreEqual(image.GetPixelColor(0, 0), data[0, 0]);
-            Assert.AreEqual(image.GetPixelColor(0, 1), data[0, 1]);
-            Assert.AreEqual(image.GetPixelColor(0, 2), data[0, 2]);
-            Assert.AreEqual(image.GetPixelColor(1, 0), data[1, 0]);
-            Assert.AreEqual(image.GetPixelColor(1, 1), data[1, 1]);
-            Assert.AreEqual(image.GetPixelColor(1, 2), data[1, 2]);
-            Assert.AreNotEqual(image.GetPixelColor(0, 0), data[1, 1]);
+            Assert.AreEqual(image.GetPixel(0, 0), data[0, 0]);
+            Assert.AreEqual(image.GetPixel(0, 1), data[0, 1]);
+            Assert.AreEqual(image.GetPixel(0, 2), data[0, 2]);
+            Assert.AreEqual(image.GetPixel(1, 0), data[1, 0]);
+            Assert.AreEqual(image.GetPixel(1, 1), data[1, 1]);
+            Assert.AreEqual(image.GetPixel(1, 2), data[1, 2]);
+            Assert.AreNotEqual(image.GetPixel(0, 0), data[1, 1]);
         }
     }
 }

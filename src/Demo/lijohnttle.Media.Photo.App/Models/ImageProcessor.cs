@@ -15,7 +15,7 @@ namespace lijohnttle.Media.Photo.App.Models
 
                 foreach (IImageFilter filter in filters)
                 {
-                    processedImage = filter.Apply(image);
+                    processedImage = filter.Apply(processedImage);
                 }
 
                 return processedImage;

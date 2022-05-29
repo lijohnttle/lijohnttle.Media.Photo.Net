@@ -1,0 +1,50 @@
+﻿<Window
+    x:Class="lijohnttle.Media.Photo.App.Views.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodels="clr-namespace:lijohnttle.Media.Photo.App.ViewModels"
+    mc:Ignorable="d"
+    Title="MainWindow"
+    Height="450"
+    Width="800"
+    d:DataContext="{d:DesignInstance Type={x:Type viewmodels:MainWindowViewModel}, IsDesignTimeCreatable=False}">
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="6" />
+            <ColumnDefinition Width="300" MinWidth="300" />
+        </Grid.ColumnDefinitions>
+
+        <GridSplitter
+            Grid.Column="1"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            ResizeDirection="Columns"
+            ResizeBehavior="PreviousAndNext" />
+
+        <Grid>
+            <Image Source="{Binding Path=Image}" />
+        </Grid>
+
+        <Grid Grid.Column="2">
+            <StackPanel Orientation="Vertical">
+                <TextBlock Margin="8,24,8,8" FontWeight="SemiBold">Image</TextBlock>
+                
+                <Grid Margin="8,0,8,8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="8" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBox IsReadOnly="True" Text="{Binding Path=ImageFileName}" />
+
+                    <Button Grid.Column="2" Width="32" Content="..." Command="{Binding Path=SelectImageCommand}" />
+                </Grid>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

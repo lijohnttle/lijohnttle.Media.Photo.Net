@@ -30,7 +30,7 @@
 
             <Button Command="{Binding DecreaseWindowSizeCommand}" Width="32">-</Button>
             
-            <TextBox Grid.Column="2" IsReadOnly="True" Text="{Binding WindowSize}" TextAlignment="Center" />
+            <TextBox Grid.Column="2" IsReadOnly="True" Text="{Binding WindowSize, Mode=OneWay}" TextAlignment="Center" />
             
             <Button Grid.Column="4" Command="{Binding IncreaseWindowSizeCommand}" Width="32">+</Button>
         </Grid>

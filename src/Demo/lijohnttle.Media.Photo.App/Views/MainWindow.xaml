@@ -5,9 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewmodels="clr-namespace:lijohnttle.Media.Photo.App.ViewModels"
-    xmlns:filters="clr-namespace:lijohnttle.Media.Photo.App.ViewModels.Filters"
     xmlns:behaviors="clr-namespace:lijohnttle.Media.Photo.App.Behaviors"
-    xmlns:filters1="clr-namespace:lijohnttle.Media.Photo.App.Views.Filters"
     xmlns:views="clr-namespace:lijohnttle.Media.Photo.App.Views"
     mc:Ignorable="d"
     Title="MainWindow"
@@ -17,10 +15,6 @@
 
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-
-        <DataTemplate DataType="{x:Type filters:MedianFilterViewModel}">
-            <filters1:MedianFilterView />
-        </DataTemplate>
     </Window.Resources>
     
     <Grid>
@@ -68,7 +62,7 @@
                     <views:FiltersListView DataContext="{Binding FiltersList}" />
 
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                        <Button x:Name="AddEffectButton" Margin="8" behaviors:ShowContextMenuOnClick.IsEnabled="True">
+                        <Button Margin="8" behaviors:ShowContextMenuOnClick.IsEnabled="True">
                             <Button.ContextMenu>
                                 <ContextMenu
                                     Placement="Bottom"
@@ -76,10 +70,11 @@
                                     d:DataContext="{d:DesignInstance Type={x:Type viewmodels:MainWindowViewModel}}">
                                     <MenuItem Header="Filter">
                                         <MenuItem Header="Median Filter" Command="{Binding FiltersList.AddMedianFilterCommand}" />
+                                        <MenuItem Header="Cartoon Filter" Command="{Binding FiltersList.AddCartoonFilterCommand}" />
                                     </MenuItem>
                                 </ContextMenu>
                             </Button.ContextMenu>
-                            Add...
+                            Add Filter...
                         </Button>
 
                         <Button Margin="8" Command="{Binding RenderCommand}">

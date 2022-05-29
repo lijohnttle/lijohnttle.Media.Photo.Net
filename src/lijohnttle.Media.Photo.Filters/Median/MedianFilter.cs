@@ -1,4 +1,5 @@
 ﻿using lijohnttle.Media.Photo.Core;
+using lijohnttle.Media.Photo.Core.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -8,7 +9,7 @@ namespace lijohnttle.Media.Photo.Filters.Median
     public class MedianFilter : IImageFilter
     {
         private MedianFilterOptions options = new MedianFilterOptions();
-        private MedianFilterPixelComparer pixelComparer = new MedianFilterPixelComparer();
+
 
         public MedianFilterOptions Options
         {
@@ -16,9 +17,10 @@ namespace lijohnttle.Media.Photo.Filters.Median
             set => options = value ?? new MedianFilterOptions();
         }
 
+
         public IImage Apply(IImage image)
         {
-            RgbColor[,] data = new RgbColor[image.Width, image.Height];
+            IImage result = new BitmapImage(image);
 
             int filterOffset = Options.WindowSize / 2;
 
@@ -37,10 +39,8 @@ namespace lijohnttle.Media.Photo.Filters.Median
 
                 IColor middlePixel = neighbourPixels[filterOffset];
 
-                data[x, y] = middlePixel.AsRgbColor();
+                result.SetPixel(x, y, middlePixel);
             });
-
-            BitmapImage result = new BitmapImage(data);
 
             return result;
         }
@@ -71,7 +71,7 @@ namespace lijohnttle.Media.Photo.Filters.Median
             int newX = linearIndex % image.Width;
             int newY = linearIndex / image.Width;
 
-            return image.GetPixelColor(newX, newY);
+            return image.GetPixel(newX, newY);
         }
     }
 }
