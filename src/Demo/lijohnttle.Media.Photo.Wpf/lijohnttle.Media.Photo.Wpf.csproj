@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="lijohnttle.Media.Photo.Core" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\lijohnttle.Media.Photo.Core\lijohnttle.Media.Photo.Core.csproj" />
   </ItemGroup>
 

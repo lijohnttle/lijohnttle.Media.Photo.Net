@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="lijohnttle.Media.Photo.Core" Version="1.0.0" />
+    <PackageReference Include="lijohnttle.Media.Photo.Filters" Version="1.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\lijohnttle.Media.Photo.Core\lijohnttle.Media.Photo.Core.csproj" />
     <ProjectReference Include="..\..\lijohnttle.Media.Photo.Filters\lijohnttle.Media.Photo.Filters.csproj" />
     <ProjectReference Include="..\lijohnttle.Media.Photo.Wpf\lijohnttle.Media.Photo.Wpf.csproj" />
