@@ -2,6 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <Authors>lijohnttle</Authors>
+    <Description>A core library for image processing.</Description>
+    <PackageProjectUrl>https://github.com/lijohnttle/lijohnttle.Media.Photo.Net</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/lijohnttle/lijohnttle.Media.Photo.Net</RepositoryUrl>
   </PropertyGroup>
 
 </Project>

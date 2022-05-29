@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <Authors>lijohnttle</Authors>
-    <Description>A set of simple image filter. This version includes filters: Median, Cartoon</Description>
+    <Description>A set of simple image filters. This version includes filters: Median, Cartoon</Description>
     <PackageProjectUrl>https://github.com/lijohnttle/lijohnttle.Media.Photo.Net</PackageProjectUrl>
     <RepositoryUrl>https://github.com/lijohnttle/lijohnttle.Media.Photo.Net</RepositoryUrl>
   </PropertyGroup>

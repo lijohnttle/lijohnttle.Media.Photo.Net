@@ -1,5 +1,4 @@
 ﻿using lijohnttle.Media.Photo.Core;
-using lijohnttle.Media.Photo.Core.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -30,7 +29,7 @@ namespace lijohnttle.Media.Photo.Filters.Median
 
                 IterateWindow(filterOffset, (offsetX, offsetY) =>
                 {
-                    IColor pixel = FindPixel(image, x, y, offsetX, offsetY);
+                    IColor pixel = image.GetPixel(x + offsetX, y + offsetY);
                     
                     neighbourPixels.Add(pixel);
                 });
@@ -62,16 +61,6 @@ namespace lijohnttle.Media.Photo.Filters.Median
                     action(filterX, filterY);
                 }
             }
-        }
-
-        private IColor FindPixel(IImage image, int x, int y, int offsetX, int offsetY)
-        {
-            int linearIndex = image.Width * (y + offsetY) + x + offsetX;
-
-            int newX = linearIndex % image.Width;
-            int newY = linearIndex / image.Width;
-
-            return image.GetPixel(newX, newY);
         }
     }
 }
