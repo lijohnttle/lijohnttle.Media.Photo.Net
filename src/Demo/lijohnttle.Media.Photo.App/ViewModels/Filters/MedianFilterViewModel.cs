@@ -26,7 +26,7 @@ namespace lijohnttle.Media.Photo.App.ViewModels.Filters
         public int WindowSize
         {
             get => GetPropertyValue<int>(nameof(WindowSize));
-            set => SetPropertyValue(nameof(WindowSize), value);
+            private set => SetPropertyValue(nameof(WindowSize), value);
         }
 
         public override IImageFilter BuildFilter()

@@ -38,7 +38,7 @@ namespace lijohnttle.Media.Photo.Wpf.Extensions
             {
                 for (int x = 0; x < image.Width; x++)
                 {
-                    var color = image.GetPixelColor(x, y).AsRgbColor();
+                    var color = image.GetPixel(x, y).AsRgbColor();
 
                     array[index] = color.Blue;
                     array[index + 1] = color.Green;

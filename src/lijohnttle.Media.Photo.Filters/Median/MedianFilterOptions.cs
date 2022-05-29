@@ -16,13 +16,13 @@ namespace lijohnttle.Media.Photo.Filters.Median
         public MedianFilterPixelComparer PixelComparer
         {
             get => pixelComparer;
-            set => pixelComparer = value ?? MedianFilterPixelComparer.Default;
+            init => pixelComparer = value ?? MedianFilterPixelComparer.Default;
         }
 
         public int WindowSize
         {
             get => matrixSize;
-            set
+            init
             {
                 if (value < 1 || value % 2 == 0)
                 {

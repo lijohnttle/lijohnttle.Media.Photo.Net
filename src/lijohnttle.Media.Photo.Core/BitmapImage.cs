@@ -1,4 +1,5 @@
-﻿using lijohnttle.Media.Photo.Core.Internal;
+﻿using lijohnttle.Media.Photo.Core.Extensions;
+using lijohnttle.Media.Photo.Core.Internal;
 
 namespace lijohnttle.Media.Photo.Core
 {
@@ -6,9 +7,6 @@ namespace lijohnttle.Media.Photo.Core
     {
         private readonly RgbColor[,] data;
 
-        /// <summary>
-        /// 
-        /// </summary>
         /// <param name="data">Array of pixels. First dimention are columns, second dimention are rows</param>
         public BitmapImage(RgbColor[,] data)
         {
@@ -17,29 +15,32 @@ namespace lijohnttle.Media.Photo.Core
 
         public BitmapImage(IImage image)
         {
-            RgbColor[,] data = new RgbColor[image.Width, image.Height];
-
-            for (int x = 0; x < image.Width; x++)
-            {
-                for (int y = 0; y < image.Height; y++)
-                {
-                    data[x, y] = image.GetPixelColor(x, y).AsRgbColor();
-                }
-            }
-
-            this.data = data;
+            this.data = image.CopyRgbPixels();
         }
 
         public int Width => data.GetLength(0);
 
         public int Height => data.GetLength(1);
 
-        public IColor GetPixelColor(int x, int y)
+        public IColor GetPixel(int x, int y)
         {
             ImageVerificationHelper.VerifyXCoordinate(x, Width);
             ImageVerificationHelper.VerifyYCoordinate(y, Height);
 
             return data[x, y];
+        }
+
+        public void SetPixel(int x, int y, IColor color)
+        {
+            ImageVerificationHelper.VerifyXCoordinate(x, Width);
+            ImageVerificationHelper.VerifyYCoordinate(y, Height);
+
+            data[x, y] = color.AsRgbColor();
+        }
+
+        public IColor[,] CopyPixels()
+        {
+            return data.Clone() as IColor[,];
         }
     }
 }
