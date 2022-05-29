@@ -80,6 +80,10 @@
                         <Button Margin="8" Command="{Binding RenderCommand}">
                             Render
                         </Button>
+
+                        <Button Margin="8" Command="{Binding SaveCommand}">
+                            Save...
+                        </Button>
                     </StackPanel>
                 </StackPanel>
             </ScrollViewer>

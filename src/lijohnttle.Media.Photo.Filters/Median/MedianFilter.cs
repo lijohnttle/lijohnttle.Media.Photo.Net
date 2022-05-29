@@ -23,13 +23,13 @@ namespace lijohnttle.Media.Photo.Filters.Median
 
             int filterOffset = Options.WindowSize / 2;
 
-            IteratePixels(image, filterOffset, (x, y) =>
+            IteratePixels(image, (x, y) =>
             {
                 List<IColor> neighbourPixels = new List<IColor>();
 
-                IterateWindow(filterOffset, (offsetX, offsetY) =>
+                IterateWindow(x, y, image.Width, image.Height, filterOffset, (windowX, windowY) =>
                 {
-                    IColor pixel = image.GetPixel(x + offsetX, y + offsetY);
+                    IColor pixel = image.GetPixel(windowX, windowY);
                     
                     neighbourPixels.Add(pixel);
                 });
@@ -44,21 +44,21 @@ namespace lijohnttle.Media.Photo.Filters.Median
             return result;
         }
 
-        private void IteratePixels(IImage image, int filterOffset, Action<int, int> action)
+        private void IteratePixels(IImage image, Action<int, int> action)
         {
-            Parallel.For(filterOffset, image.Height - filterOffset - 1, y =>
+            Parallel.For(0, image.Height - 1, y =>
             {
-                Parallel.For(filterOffset, image.Width - filterOffset - 1, x => action(x, y));
+                Parallel.For(0, image.Width - 1, x => action(x, y));
             });
         }
 
-        private void IterateWindow(int filterOffset, Action<int, int> action)
+        private void IterateWindow(int x, int y, int width, int height, int filterOffset, Action<int, int> action)
         {
-            for (int filterY = -filterOffset; filterY <= filterOffset; filterY++)
+            for (int windowY = Math.Max(0, y - filterOffset); windowY <= Math.Min(height - 1, y + filterOffset); windowY++)
             {
-                for (int filterX = -filterOffset; filterX <= filterOffset; filterX++)
+                for (int windowX = Math.Max(0, x - filterOffset); windowX <= Math.Min(width - 1, x + filterOffset); windowX++)
                 {
-                    action(filterX, filterY);
+                    action(windowX, windowY);
                 }
             }
         }

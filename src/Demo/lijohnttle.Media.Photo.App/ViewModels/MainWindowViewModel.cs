@@ -21,6 +21,7 @@ namespace lijohnttle.Media.Photo.App.ViewModels
         {
             SelectImageCommand = new SelectImageCommand(messenger);
             RenderCommand = new DelegateCommand(Render, CanRender);
+            SaveCommand = new SaveImageCommand(() => Image);
             this.imageProcessor = imageProcessor;
             FiltersList = new FiltersListViewModel(messenger);
 
@@ -31,6 +32,8 @@ namespace lijohnttle.Media.Photo.App.ViewModels
         public ICommand SelectImageCommand { get; }
 
         public ICommand RenderCommand { get; }
+
+        public ICommand SaveCommand { get; }
 
         public string ImageFileName
         {
