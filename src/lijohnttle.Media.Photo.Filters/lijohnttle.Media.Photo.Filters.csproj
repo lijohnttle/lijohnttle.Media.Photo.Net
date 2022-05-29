@@ -6,6 +6,7 @@
     <Description>A set of simple image filters. This version includes filters: Median, Cartoon</Description>
     <PackageProjectUrl>https://github.com/lijohnttle/lijohnttle.Media.Photo.Net</PackageProjectUrl>
     <RepositoryUrl>https://github.com/lijohnttle/lijohnttle.Media.Photo.Net</RepositoryUrl>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
