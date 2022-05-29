@@ -7,5 +7,6 @@
         Median7x7,
         Median9x9,
         Median11x11,
+        Median13x13,
     }
 }

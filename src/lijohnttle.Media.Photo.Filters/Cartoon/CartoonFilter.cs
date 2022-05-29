@@ -134,55 +134,23 @@ namespace lijohnttle.Media.Photo.Filters.Cartoon
 
         private static IImageFilter GetSmoothingFilter(CartoonSmoothingFilterType smoothingFilterType)
         {
-            switch (smoothingFilterType)
+            string filterTypeName = Enum.GetName(typeof(CartoonSmoothingFilterType), smoothingFilterType);
+
+            if (filterTypeName.StartsWith("Median"))
             {
-                case CartoonSmoothingFilterType.Median3x3:
-                    return new MedianFilter
-                    {
-                        Options = new MedianFilterOptions
-                        {
-                            WindowSize = 3
-                        }
-                    };
+                int windowSize = int.Parse(filterTypeName.Substring("Median".Length).Split("x")[0]);
 
-                case CartoonSmoothingFilterType.Median5x5:
-                    return new MedianFilter
+                return new MedianFilter
+                {
+                    Options = new MedianFilterOptions
                     {
-                        Options = new MedianFilterOptions
-                        {
-                            WindowSize = 5
-                        }
-                    };
-
-                case CartoonSmoothingFilterType.Median7x7:
-                    return new MedianFilter
-                    {
-                        Options = new MedianFilterOptions
-                        {
-                            WindowSize = 7
-                        }
-                    };
-
-                case CartoonSmoothingFilterType.Median9x9:
-                    return new MedianFilter
-                    {
-                        Options = new MedianFilterOptions
-                        {
-                            WindowSize = 9
-                        }
-                    };
-
-                case CartoonSmoothingFilterType.Median11x11:
-                    return new MedianFilter
-                    {
-                        Options = new MedianFilterOptions
-                        {
-                            WindowSize = 11
-                        }
-                    };
-
-                default:
-                    throw new NotSupportedException($"Filter type '{smoothingFilterType}' is not supported.");
+                        WindowSize = windowSize
+                    }
+                };
+            }
+            else
+            {
+                throw new NotSupportedException($"Filter type '{smoothingFilterType}' is not supported.");
             }
         }
     }
