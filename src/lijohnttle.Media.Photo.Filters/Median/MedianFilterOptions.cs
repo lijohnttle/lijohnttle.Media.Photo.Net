@@ -7,14 +7,8 @@ namespace lijohnttle.Media.Photo.Filters.Median
     /// </summary>
     public class MedianFilterOptions
     {
-        private MedianFilterPixelComparer pixelComparer;
-        private int windowSize;
-
-        public MedianFilterOptions()
-        {
-            WindowSize = 3;
-            PixelComparer = MedianFilterPixelComparer.Default;
-        }
+        private MedianFilterPixelComparer pixelComparer = MedianFilterPixelComparer.Default;
+        private int windowSize = 3;
 
 
         /// <summary>
@@ -27,7 +21,7 @@ namespace lijohnttle.Media.Photo.Filters.Median
         }
 
         /// <summary>
-        /// A processing window size. Must be an odd number >= 3.
+        /// Gets the processing window size. Must be an odd number >= 3.
         /// </summary>
         public int WindowSize
         {
@@ -37,7 +31,7 @@ namespace lijohnttle.Media.Photo.Filters.Median
                 if (value < 3 || value % 2 == 0)
                 {
                     throw new ArgumentOutOfRangeException(nameof(value),
-                        "Window size of the median filter must be an odd number >= 3");
+                        "Window size of the filter must be an odd number >= 3.");
                 }
 
                 windowSize = value;

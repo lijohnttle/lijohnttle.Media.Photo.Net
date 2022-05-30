@@ -27,7 +27,7 @@ namespace lijohnttle.Media.Photo.Filters.Convolution
                             "The number of rows and columns in a convolution matrix must be equal");
                     }
 
-                    if (value.Length < 3 || value.Length % 2 == 0)
+                    if (value.GetLength(0) < 3 || value.GetLength(0) % 2 == 0)
                     {
                         throw new ArgumentOutOfRangeException(nameof(value),
                             "Convolution matrix size must be an odd number >= 3");

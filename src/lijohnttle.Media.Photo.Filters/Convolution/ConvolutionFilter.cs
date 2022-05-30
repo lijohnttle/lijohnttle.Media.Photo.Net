@@ -1,6 +1,7 @@
 ﻿using lijohnttle.Media.Photo.Core;
 using lijohnttle.Media.Photo.Filters.Internal.Helpers;
 using System;
+using System.Diagnostics;
 
 namespace lijohnttle.Media.Photo.Filters.Convolution
 {
@@ -25,8 +26,14 @@ namespace lijohnttle.Media.Photo.Filters.Convolution
         /// <inheritdoc />
         public IImage Apply(IImage image)
         {
+            Stopwatch sw = new Stopwatch();
+
+            sw.Start();
             IImage result = new BitmapImage(image);
             ConvolutionFilterOptions options = Options;
+
+            sw.Stop();
+            Debug.WriteLine($"Copy image took: {sw.ElapsedMilliseconds}ms");
 
             double[,] matrix = options.ConvolutionMatrix;
 
@@ -35,7 +42,7 @@ namespace lijohnttle.Media.Photo.Filters.Convolution
                 throw new InvalidOperationException("Convolution matrix can't be null.");
             }
 
-            int filterOffset = matrix.Length / 2;
+            int filterOffset = matrix.GetLength(0) / 2;
 
             // iterate every pixel of the image
             image.IteratePixelsInParallel((x, y) =>

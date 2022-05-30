@@ -18,6 +18,7 @@ namespace lijohnttle.Media.Photo.App.ViewModels
             Filters = new ObservableCollection<IFilterViewModel>();
             AddMedianFilterCommand = new DelegateCommand(AddMedianFilter);
             AddCartoonFilterCommand = new DelegateCommand(AddCartoonFilter);
+            AddGaussianFilterCommand = new DelegateCommand(AddGaussianFilter);
             this.messenger = messenger;
 
             messenger.Subscribe<DeleteFilterEvent>(OnDeleteFilter);
@@ -27,6 +28,8 @@ namespace lijohnttle.Media.Photo.App.ViewModels
         public ICommand AddMedianFilterCommand { get; }
 
         public ICommand AddCartoonFilterCommand { get; }
+
+        public ICommand AddGaussianFilterCommand { get; }
 
         public ObservableCollection<IFilterViewModel> Filters { get; }
 
@@ -41,6 +44,11 @@ namespace lijohnttle.Media.Photo.App.ViewModels
         private void AddMedianFilter()
         {
             Filters.Add(new MedianFilterViewModel(messenger));
+        }
+
+        private void AddGaussianFilter()
+        {
+            Filters.Add(new GaussianFilterViewModel(messenger));
         }
 
         private void AddCartoonFilter()
