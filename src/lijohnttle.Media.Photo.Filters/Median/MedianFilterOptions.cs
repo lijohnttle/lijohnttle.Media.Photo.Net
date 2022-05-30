@@ -2,35 +2,39 @@
 
 namespace lijohnttle.Media.Photo.Filters.Median
 {
+    /// <summary>
+    /// Median filter options.
+    /// </summary>
     public class MedianFilterOptions
     {
-        private MedianFilterPixelComparer pixelComparer;
-        private int matrixSize;
+        private MedianFilterPixelComparer pixelComparer = MedianFilterPixelComparer.Default;
+        private int windowSize = 3;
 
-        public MedianFilterOptions()
-        {
-            WindowSize = 3;
-            PixelComparer = MedianFilterPixelComparer.Default;
-        }
 
+        /// <summary>
+        /// A comparer that is used to compare pixels to select a median.
+        /// </summary>
         public MedianFilterPixelComparer PixelComparer
         {
             get => pixelComparer;
             init => pixelComparer = value ?? MedianFilterPixelComparer.Default;
         }
 
+        /// <summary>
+        /// Gets the processing window size. Must be an odd number >= 3.
+        /// </summary>
         public int WindowSize
         {
-            get => matrixSize;
+            get => windowSize;
             init
             {
-                if (value < 1 || value % 2 == 0)
+                if (value < 3 || value % 2 == 0)
                 {
                     throw new ArgumentOutOfRangeException(nameof(value),
-                        "MatrixSize of the median filter must be an odd number greater than 0");
+                        "Window size of the filter must be an odd number >= 3.");
                 }
 
-                matrixSize = value;
+                windowSize = value;
             }
         }
     }

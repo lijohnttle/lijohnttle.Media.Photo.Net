@@ -20,6 +20,10 @@
         <DataTemplate DataType="{x:Type filters:CartoonFilterViewModel}">
             <filtersViews:CartoonFilterView />
         </DataTemplate>
+
+        <DataTemplate DataType="{x:Type filters:GaussianFilterViewModel}">
+            <filtersViews:GaussianFilterView />
+        </DataTemplate>
     </UserControl.Resources>
 
     <ItemsControl ItemsSource="{Binding Filters}">

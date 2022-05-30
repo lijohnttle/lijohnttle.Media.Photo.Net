@@ -70,6 +70,7 @@
                                     d:DataContext="{d:DesignInstance Type={x:Type viewmodels:MainWindowViewModel}}">
                                     <MenuItem Header="Filter">
                                         <MenuItem Header="Median Filter" Command="{Binding FiltersList.AddMedianFilterCommand}" />
+                                        <MenuItem Header="Gaussian Filter" Command="{Binding FiltersList.AddGaussianFilterCommand}" />
                                         <MenuItem Header="Cartoon Filter" Command="{Binding FiltersList.AddCartoonFilterCommand}" />
                                     </MenuItem>
                                 </ContextMenu>
