@@ -1,6 +1,7 @@
 ﻿using lijohnttle.Media.Photo.Core;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace lijohnttle.Media.Photo.Filters.Median
@@ -25,14 +26,7 @@ namespace lijohnttle.Media.Photo.Filters.Median
 
             IteratePixels(image, (x, y) =>
             {
-                List<IColor> neighbourPixels = new List<IColor>();
-
-                IterateWindow(x, y, image.Width, image.Height, filterOffset, (windowX, windowY) =>
-                {
-                    IColor pixel = image.GetPixel(windowX, windowY);
-                    
-                    neighbourPixels.Add(pixel);
-                });
+                List<IColor> neighbourPixels = FindWindowPixels(image, x, y, filterOffset).ToList();
 
                 neighbourPixels.Sort(options.PixelComparer);
 
@@ -52,13 +46,13 @@ namespace lijohnttle.Media.Photo.Filters.Median
             });
         }
 
-        private void IterateWindow(int x, int y, int width, int height, int filterOffset, Action<int, int> action)
+        private IEnumerable<IColor> FindWindowPixels(IImage image, int x, int y, int filterOffset)
         {
-            for (int windowY = Math.Max(0, y - filterOffset); windowY <= Math.Min(height - 1, y + filterOffset); windowY++)
+            for (int windowY = Math.Max(0, y - filterOffset); windowY <= Math.Min(image.Height - 1, y + filterOffset); windowY++)
             {
-                for (int windowX = Math.Max(0, x - filterOffset); windowX <= Math.Min(width - 1, x + filterOffset); windowX++)
+                for (int windowX = Math.Max(0, x - filterOffset); windowX <= Math.Min(image.Width - 1, x + filterOffset); windowX++)
                 {
-                    action(windowX, windowY);
+                    yield return image.GetPixel(windowX, windowY);
                 }
             }
         }
