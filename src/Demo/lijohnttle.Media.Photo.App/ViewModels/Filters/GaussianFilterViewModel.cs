@@ -10,6 +10,7 @@ namespace lijohnttle.Media.Photo.App.ViewModels.Filters
             : base(messenger)
         {
             Radius = 1;
+            Weight = 5;
         }
 
 
@@ -21,6 +22,12 @@ namespace lijohnttle.Media.Photo.App.ViewModels.Filters
             set => SetPropertyValue(nameof(Radius), value);
         }
 
+        public double Weight
+        {
+            get => GetPropertyValue<double>(nameof(Weight));
+            set => SetPropertyValue(nameof(Weight), value);
+        }
+
 
         public override IImageFilter BuildFilter()
         {
@@ -28,7 +35,8 @@ namespace lijohnttle.Media.Photo.App.ViewModels.Filters
             {
                 Options = new GaussianFilterOptions
                 {
-                    Radius = Radius
+                    Radius = Radius,
+                    Weight = Weight
                 }
             };
         }

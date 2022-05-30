@@ -7,7 +7,8 @@ namespace lijohnttle.Media.Photo.Filters.Gaussian
     /// </summary>
     public class GaussianFilterOptions
     {
-        private int radius;
+        private int radius = 1;
+        private double weight = 5.5;
 
 
         /// <summary>
@@ -25,6 +26,24 @@ namespace lijohnttle.Media.Photo.Filters.Gaussian
                 }
 
                 radius = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets the weight of the filter. Must be a positive number.
+        /// </summary>
+        public double Weight
+        {
+            get => weight;
+            init
+            {
+                if (value <= 0)
+                {
+                    throw new ArgumentOutOfRangeException(nameof(value),
+                        "Radius of the gaussian filter must be a positive number.");
+                }
+
+                weight = value;
             }
         }
     }

@@ -1,7 +1,6 @@
 ﻿using lijohnttle.Media.Photo.Core;
 using lijohnttle.Media.Photo.Filters.Internal.Helpers;
 using System;
-using System.Diagnostics;
 
 namespace lijohnttle.Media.Photo.Filters.Convolution
 {
@@ -26,14 +25,8 @@ namespace lijohnttle.Media.Photo.Filters.Convolution
         /// <inheritdoc />
         public IImage Apply(IImage image)
         {
-            Stopwatch sw = new Stopwatch();
-
-            sw.Start();
             IImage result = new BitmapImage(image);
             ConvolutionFilterOptions options = Options;
-
-            sw.Stop();
-            Debug.WriteLine($"Copy image took: {sw.ElapsedMilliseconds}ms");
 
             double[,] matrix = options.ConvolutionMatrix;
 

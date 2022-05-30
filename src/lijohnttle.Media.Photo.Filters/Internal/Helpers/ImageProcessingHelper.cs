@@ -20,6 +20,22 @@ namespace lijohnttle.Media.Photo.Filters.Internal.Helpers
         }
 
         /// <summary>
+        /// Iterates image pixels.
+        /// </summary>
+        /// <param name="image">The original image that is being processed.</param>
+        /// <param name="action">The action to process pixel.</param>
+        public static void IteratePixels(this IImage image, Action<int, int> action)
+        {
+            for (int y = 0; y < image.Height; y++)
+            {
+                for (int x = 0; x < image.Width; x++)
+                {
+                    action(x, y);
+                }
+            }
+        }
+
+        /// <summary>
         /// Iterates image pixels within a processing matrix.
         /// </summary>
         /// <param name="image">The original image that is being processed.</param>
