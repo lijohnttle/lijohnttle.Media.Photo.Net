@@ -1,4 +1,5 @@
 ﻿using lijohnttle.Media.Photo.Core;
+using lijohnttle.Media.Photo.Filters.Internal.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,51 +32,25 @@ namespace lijohnttle.Media.Photo.Filters.Median
 
             int filterOffset = Options.WindowSize / 2;
 
-            IteratePixels(image, (x, y) =>
+            // iterate every pixel of the image
+            image.IteratePixelsInParallel((x, y) =>
             {
-                List<IColor> neighbourPixels = FindWindowPixels(image, x, y, filterOffset).ToList();
+                List<IColor> neighbourPixels = new List<IColor>();
 
+                // find all pixels within a window
+                image.IterateMatrixPixels(x, y, filterOffset,
+                    (windowX, windowY) => neighbourPixels.Add(image.GetPixel(windowX, windowY)));
+
+                // sort pixels
                 neighbourPixels.Sort(options.PixelComparer);
 
+                // take middle pixel
                 IColor middlePixel = neighbourPixels[neighbourPixels.Count / 2];
 
                 result.SetPixel(x, y, middlePixel);
             });
 
             return result;
-        }
-
-
-        /// <summary>
-        /// Iterates image pixels.
-        /// </summary>
-        /// <param name="image">The original image that is being processed.</param>
-        /// <param name="action">An action to process pixel.</param>
-        private void IteratePixels(IImage image, Action<int, int> action)
-        {
-            Parallel.For(0, image.Height - 1, y =>
-            {
-                Parallel.For(0, image.Width - 1, x => action(x, y));
-            });
-        }
-
-        /// <summary>
-        /// Finds all pixels inside processing window.
-        /// </summary>
-        /// <param name="image">The original image that is being processed.</param>
-        /// <param name="x">The X index of the current pixel.</param>
-        /// <param name="y">The Y index of the current pixel.</param>
-        /// <param name="filterOffset">The half-length of the processing window.</param>
-        /// <returns>List of pixels.</returns>
-        private IEnumerable<IColor> FindWindowPixels(IImage image, int x, int y, int filterOffset)
-        {
-            for (int windowY = Math.Max(0, y - filterOffset); windowY <= Math.Min(image.Height - 1, y + filterOffset); windowY++)
-            {
-                for (int windowX = Math.Max(0, x - filterOffset); windowX <= Math.Min(image.Width - 1, x + filterOffset); windowX++)
-                {
-                    yield return image.GetPixel(windowX, windowY);
-                }
-            }
         }
     }
 }
