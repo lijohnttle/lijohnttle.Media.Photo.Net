@@ -6,11 +6,17 @@ using System.Threading.Tasks;
 
 namespace lijohnttle.Media.Photo.Filters.Median
 {
+    /// <summary>
+    /// Median image filter.
+    /// </summary>
     public class MedianFilter : IImageFilter
     {
         private MedianFilterOptions options = new MedianFilterOptions();
 
 
+        /// <summary>
+        /// Gets or sets options of the filter.
+        /// </summary>
         public MedianFilterOptions Options
         {
             get => options;
@@ -18,6 +24,7 @@ namespace lijohnttle.Media.Photo.Filters.Median
         }
 
 
+        /// <inheritdoc />
         public IImage Apply(IImage image)
         {
             IImage result = new BitmapImage(image);
@@ -38,6 +45,12 @@ namespace lijohnttle.Media.Photo.Filters.Median
             return result;
         }
 
+
+        /// <summary>
+        /// Iterates image pixels.
+        /// </summary>
+        /// <param name="image">The original image that is being processed.</param>
+        /// <param name="action">An action to process pixel.</param>
         private void IteratePixels(IImage image, Action<int, int> action)
         {
             Parallel.For(0, image.Height - 1, y =>
@@ -46,6 +59,14 @@ namespace lijohnttle.Media.Photo.Filters.Median
             });
         }
 
+        /// <summary>
+        /// Finds all pixels inside processing window.
+        /// </summary>
+        /// <param name="image">The original image that is being processed.</param>
+        /// <param name="x">The X index of the current pixel.</param>
+        /// <param name="y">The Y index of the current pixel.</param>
+        /// <param name="filterOffset">The half-length of the processing window.</param>
+        /// <returns>List of pixels.</returns>
         private IEnumerable<IColor> FindWindowPixels(IImage image, int x, int y, int filterOffset)
         {
             for (int windowY = Math.Max(0, y - filterOffset); windowY <= Math.Min(image.Height - 1, y + filterOffset); windowY++)
