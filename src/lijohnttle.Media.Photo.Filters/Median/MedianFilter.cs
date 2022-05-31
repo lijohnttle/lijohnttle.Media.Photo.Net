@@ -1,6 +1,5 @@
 ﻿using lijohnttle.Media.Photo.Core;
-using lijohnttle.Media.Photo.Filters.Internal.Helpers;
-using System.Collections.Generic;
+using lijohnttle.Media.Photo.Filters.Median.Algorithms;
 
 namespace lijohnttle.Media.Photo.Filters.Median
 {
@@ -21,33 +20,23 @@ namespace lijohnttle.Media.Photo.Filters.Median
             set => options = value ?? new MedianFilterOptions();
         }
 
+        /// <summary>
+        /// Gets or sets the algorithm to be used. If not set then the default algorithm will be used.
+        /// </summary>
+        public IMedianFilterAlgorithm Algorithm { get; set; }
+
 
         /// <inheritdoc />
         public IImage Apply(IImage image)
         {
-            IImage result = new BitmapImage(image);
+            IMedianFilterAlgorithm algorithm = Algorithm;
 
-            int radius = Options.Radius;
-
-            // iterate every pixel of the image
-            image.IteratePixelsInParallel((x, y) =>
+            if (algorithm == null)
             {
-                List<IColor> neighbourPixels = new List<IColor>();
+                algorithm = HuangMedianFilterAlgorithm.Default;
+            }
 
-                // find all pixels within a window
-                image.IterateMatrixPixels(x, y, radius,
-                    (windowX, windowY) => neighbourPixels.Add(image.GetPixel(windowX, windowY)));
-
-                // sort pixels
-                neighbourPixels.Sort(options.PixelComparer);
-
-                // take the middle pixel
-                IColor middlePixel = neighbourPixels[neighbourPixels.Count / 2];
-
-                result.SetPixel(x, y, middlePixel);
-            });
-
-            return result;
+            return algorithm.Apply(image, Options);
         }
     }
 }

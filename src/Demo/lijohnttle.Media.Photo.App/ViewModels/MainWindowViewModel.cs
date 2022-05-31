@@ -4,6 +4,7 @@ using lijohnttle.Media.Photo.App.Models;
 using lijohnttle.Media.Photo.App.ViewModels.Common;
 using lijohnttle.Media.Photo.Core;
 using lijohnttle.Media.Photo.Wpf.Extensions;
+using System.Diagnostics;
 using System.IO;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -61,6 +62,12 @@ namespace lijohnttle.Media.Photo.App.ViewModels
 
         public FiltersListViewModel FiltersList { get; }
 
+        public string LastRenderDuration
+        {
+            get => GetPropertyValue<string>(nameof(LastRenderDuration));
+            set => SetPropertyValue(nameof(LastRenderDuration), value);
+        }
+
 
         private void LoadImage(string fileName)
         {
@@ -92,11 +99,17 @@ namespace lijohnttle.Media.Photo.App.ViewModels
 
             IsProcessing = true;
 
+            Stopwatch sw = new();
+            sw.Start();
+
             IImage image = await imageProcessor.ProcessImageAsync(originalImage, FiltersList.BuildFilters());
 
             Image = image.ConvertToBitmapSource();
 
+            sw.Stop();
             IsProcessing = false;
+
+            LastRenderDuration = sw.Elapsed.ToString(@"mm\:ss\.fff");
 
             CommandManager.InvalidateRequerySuggested();
         }

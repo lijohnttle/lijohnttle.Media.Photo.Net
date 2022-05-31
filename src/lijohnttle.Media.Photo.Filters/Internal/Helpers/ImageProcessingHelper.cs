@@ -11,27 +11,35 @@ namespace lijohnttle.Media.Photo.Filters.Internal.Helpers
         /// </summary>
         /// <param name="image">The original image that is being processed.</param>
         /// <param name="action">The action to process pixel.</param>
-        public static void IteratePixelsInParallel(this IImage image, Action<int, int> action)
+        public static void IterateImagePixels(this IImage image, Action<int, int> action,
+            ImagePixelsIterationMode mode = ImagePixelsIterationMode.InParallel)
         {
-            Parallel.For(0, image.Height - 1, y =>
+            if (mode == ImagePixelsIterationMode.Sequential)
             {
-                Parallel.For(0, image.Width - 1, x => action(x, y));
-            });
-        }
-
-        /// <summary>
-        /// Iterates image pixels.
-        /// </summary>
-        /// <param name="image">The original image that is being processed.</param>
-        /// <param name="action">The action to process pixel.</param>
-        public static void IteratePixels(this IImage image, Action<int, int> action)
-        {
-            for (int y = 0; y < image.Height; y++)
-            {
-                for (int x = 0; x < image.Width; x++)
+                for (int y = 0; y < image.Height; y++)
                 {
-                    action(x, y);
+                    for (int x = 0; x < image.Width; x++)
+                    {
+                        action(x, y);
+                    }
                 }
+            }
+            else
+            {
+                Parallel.For(0, image.Height - 1, y =>
+                {
+                    if (mode == ImagePixelsIterationMode.InParallel)
+                    {
+                        Parallel.For(0, image.Width - 1, x => action(x, y));
+                    }
+                    else
+                    {
+                        for (int x = 0; x < image.Width; x++)
+                        {
+                            action(x, y);
+                        }
+                    }
+                });
             }
         }
 
@@ -43,13 +51,28 @@ namespace lijohnttle.Media.Photo.Filters.Internal.Helpers
         /// <param name="y">The Y index of the current pixel.</param>
         /// <param name="radius">The half-length of the processing matrix.</param>
         /// <param name="action">The action to process pixel.</param>
-        public static void IterateMatrixPixels(this IImage image, int x, int y, int radius, Action<int, int> action)
+        /// <param name="rowByRow">Determines if iterations should be done row-by-row or column-by-column.</param>
+        public static void IterateMatrix(this IImage image, int x, int y, int radius, Action<int, int> action,
+            bool rowByRow = true)
         {
-            for (int windowY = Math.Max(0, y - radius); windowY <= Math.Min(image.Height - 1, y + radius); windowY++)
+            if (rowByRow)
+            {
+                for (int windowY = Math.Max(0, y - radius); windowY <= Math.Min(image.Height - 1, y + radius); windowY++)
+                {
+                    for (int windowX = Math.Max(0, x - radius); windowX <= Math.Min(image.Width - 1, x + radius); windowX++)
+                    {
+                        action(windowX, windowY);
+                    }
+                }
+            }
+            else
             {
                 for (int windowX = Math.Max(0, x - radius); windowX <= Math.Min(image.Width - 1, x + radius); windowX++)
                 {
-                    action(windowX, windowY);
+                    for (int windowY = Math.Max(0, y - radius); windowY <= Math.Min(image.Height - 1, y + radius); windowY++)
+                    {
+                        action(windowX, windowY);
+                    }
                 }
             }
         }
