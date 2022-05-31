@@ -41,7 +41,7 @@ namespace lijohnttle.Media.Photo.Filters.Median
                 // sort pixels
                 neighbourPixels.Sort(options.PixelComparer);
 
-                // take middle pixel
+                // take the middle pixel
                 IColor middlePixel = neighbourPixels[neighbourPixels.Count / 2];
 
                 result.SetPixel(x, y, middlePixel);
