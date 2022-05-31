@@ -1,9 +1,6 @@
 ﻿using lijohnttle.Media.Photo.Core;
 using lijohnttle.Media.Photo.Filters.Internal.Helpers;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace lijohnttle.Media.Photo.Filters.Median
 {
@@ -30,7 +27,7 @@ namespace lijohnttle.Media.Photo.Filters.Median
         {
             IImage result = new BitmapImage(image);
 
-            int filterOffset = Options.WindowSize / 2;
+            int radius = Options.Radius;
 
             // iterate every pixel of the image
             image.IteratePixelsInParallel((x, y) =>
@@ -38,7 +35,7 @@ namespace lijohnttle.Media.Photo.Filters.Median
                 List<IColor> neighbourPixels = new List<IColor>();
 
                 // find all pixels within a window
-                image.IterateMatrixPixels(x, y, filterOffset,
+                image.IterateMatrixPixels(x, y, radius,
                     (windowX, windowY) => neighbourPixels.Add(image.GetPixel(windowX, windowY)));
 
                 // sort pixels

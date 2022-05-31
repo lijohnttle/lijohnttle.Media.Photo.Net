@@ -17,22 +17,25 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         
-        <TextBlock Text="Window Size" />
+        <TextBlock Text="Radius" />
 
         <Grid Grid.Column="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="8" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="8" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <Button Command="{Binding DecreaseWindowSizeCommand}" Width="32">-</Button>
-            
-            <TextBox Grid.Column="2" IsReadOnly="True" Text="{Binding WindowSize, Mode=OneWay}" TextAlignment="Center" />
-            
-            <Button Grid.Column="4" Command="{Binding IncreaseWindowSizeCommand}" Width="32">+</Button>
+            <Slider
+                Value="{Binding Radius, Mode=TwoWay}"
+                Minimum="1"
+                Maximum="15"
+                SmallChange="1"
+                LargeChange="2"
+                IsSnapToTickEnabled="True" />
+
+            <TextBlock Grid.Column="2" Text="15" Visibility="Hidden" />
+            <TextBlock Grid.Column="2" Text="{Binding Radius}" />
         </Grid>
     </Grid>
 </UserControl>

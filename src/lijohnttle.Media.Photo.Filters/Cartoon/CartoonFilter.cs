@@ -144,7 +144,7 @@ namespace lijohnttle.Media.Photo.Filters.Cartoon
                 {
                     Options = new MedianFilterOptions
                     {
-                        WindowSize = windowSize
+                        Radius = windowSize
                     }
                 };
             }

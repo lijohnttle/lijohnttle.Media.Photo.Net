@@ -1,8 +1,6 @@
 ﻿using lijohnttle.Media.Photo.App.Events;
-using lijohnttle.Media.Photo.App.ViewModels.Common;
 using lijohnttle.Media.Photo.Filters;
 using lijohnttle.Media.Photo.Filters.Median;
-using System.Windows.Input;
 
 namespace lijohnttle.Media.Photo.App.ViewModels.Filters
 {
@@ -11,22 +9,15 @@ namespace lijohnttle.Media.Photo.App.ViewModels.Filters
         public MedianFilterViewModel(IMessenger messenger)
             : base(messenger)
         {
-            WindowSize = 3;
-
-            IncreaseWindowSizeCommand = new DelegateCommand(IncreaseWindowSize);
-            DecreaseWindowSizeCommand = new DelegateCommand(DecreaseWindowSize, CanDecreaseWindowSize);
+            Radius = 3;
         }
-
-        public ICommand IncreaseWindowSizeCommand { get; }
-
-        public ICommand DecreaseWindowSizeCommand { get; }
 
         public override string Title { get; } = "Median Filter";
 
-        public int WindowSize
+        public int Radius
         {
-            get => GetPropertyValue<int>(nameof(WindowSize));
-            private set => SetPropertyValue(nameof(WindowSize), value);
+            get => GetPropertyValue<int>(nameof(Radius));
+            set => SetPropertyValue(nameof(Radius), value);
         }
 
         public override IImageFilter BuildFilter()
@@ -35,24 +26,9 @@ namespace lijohnttle.Media.Photo.App.ViewModels.Filters
             {
                 Options = new MedianFilterOptions
                 {
-                    WindowSize = WindowSize
+                    Radius = Radius
                 }
             };
-        }
-
-        private bool CanDecreaseWindowSize()
-        {
-            return WindowSize > 3;
-        }
-
-        private void DecreaseWindowSize()
-        {
-            WindowSize -= 2;
-        }
-
-        private void IncreaseWindowSize()
-        {
-            WindowSize += 2;
         }
     }
 }

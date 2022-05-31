@@ -41,13 +41,13 @@ namespace lijohnttle.Media.Photo.Filters.Internal.Helpers
         /// <param name="image">The original image that is being processed.</param>
         /// <param name="x">The X index of the current pixel.</param>
         /// <param name="y">The Y index of the current pixel.</param>
-        /// <param name="filterOffset">The half-length of the processing matrix.</param>
+        /// <param name="radius">The half-length of the processing matrix.</param>
         /// <param name="action">The action to process pixel.</param>
-        public static void IterateMatrixPixels(this IImage image, int x, int y, int filterOffset, Action<int, int> action)
+        public static void IterateMatrixPixels(this IImage image, int x, int y, int radius, Action<int, int> action)
         {
-            for (int windowY = Math.Max(0, y - filterOffset); windowY <= Math.Min(image.Height - 1, y + filterOffset); windowY++)
+            for (int windowY = Math.Max(0, y - radius); windowY <= Math.Min(image.Height - 1, y + radius); windowY++)
             {
-                for (int windowX = Math.Max(0, x - filterOffset); windowX <= Math.Min(image.Width - 1, x + filterOffset); windowX++)
+                for (int windowX = Math.Max(0, x - radius); windowX <= Math.Min(image.Width - 1, x + radius); windowX++)
                 {
                     action(windowX, windowY);
                 }
