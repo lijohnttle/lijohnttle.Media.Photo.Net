@@ -58,6 +58,9 @@ namespace lijohnttle.Media.Photo.Filters
             return true;
         }
 
+        /// <summary>
+        /// Iterates all pixels in the kernel.
+        /// </summary>
         private IEnumerable<IColor> IterateColumnByColumn()
         {
             for (int windowX = Left; windowX <= Right; windowX++)
@@ -69,6 +72,9 @@ namespace lijohnttle.Media.Photo.Filters
             }
         }
 
+        /// <summary>
+        /// Appends right column of pixels to the queue. 
+        /// </summary>
         private void TryAppendRightColumn()
         {
             int column = PositionX + Radius;
@@ -86,6 +92,9 @@ namespace lijohnttle.Media.Photo.Filters
             return;
         }
 
+        /// <summary>
+        /// Removes left column of pixels from the queue. 
+        /// </summary>
         private void RemoveLeftColumn()
         {
             int kernelHeight = Height;
