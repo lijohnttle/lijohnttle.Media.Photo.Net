@@ -33,8 +33,7 @@ namespace lijohnttle.Media.Photo.Filters.Median
 
             if (algorithm == null)
             {
-                algorithm = StandardMedianFilterAlgorithm.Default;
-                //algorithm = HuangMedianFilterAlgorithm.Default;
+                algorithm = HuangMedianFilterAlgorithm.Default;
             }
 
             return algorithm.Apply(image, Options);
