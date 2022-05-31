@@ -16,7 +16,14 @@
             <ColumnDefinition Width="8" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="8" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
         
+        <!-- Radius -->
+
         <TextBlock Text="Radius" />
 
         <Grid Grid.Column="2">
@@ -37,5 +44,16 @@
             <TextBlock Grid.Column="2" Text="15" Visibility="Hidden" />
             <TextBlock Grid.Column="2" Text="{Binding Radius}" />
         </Grid>
+
+        <!-- Algorithm -->
+
+        <TextBlock Grid.Row="2" Text="Algorithm" />
+
+        <ComboBox
+            Grid.Column="2"
+            Grid.Row="2"
+            DisplayMemberPath="Title"
+            SelectedItem="{Binding Algorithm, Mode=TwoWay}"
+            ItemsSource="{Binding Algorithms}" />
     </Grid>
 </UserControl>

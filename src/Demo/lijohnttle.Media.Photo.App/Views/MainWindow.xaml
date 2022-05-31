@@ -41,6 +41,11 @@
         </Grid>
 
         <Grid Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            
             <ScrollViewer>
                 <StackPanel Orientation="Vertical">
                     <TextBlock Margin="8,24,8,8" FontWeight="SemiBold">Image</TextBlock>
@@ -88,6 +93,13 @@
                     </StackPanel>
                 </StackPanel>
             </ScrollViewer>
+
+            <Grid Grid.Row="1">
+                <TextBlock Margin="8">
+                    <Run Text="Duration: " />
+                    <Run Text="{Binding Path=LastRenderDuration, Mode=OneWay}" />
+                </TextBlock>
+            </Grid>
         </Grid>
     </Grid>
 </Window>

@@ -38,7 +38,7 @@ namespace lijohnttle.Media.Photo.Filters.Convolution
             int filterOffset = matrix.GetLength(0) / 2;
 
             // iterate every pixel of the image
-            image.IteratePixelsInParallel((x, y) =>
+            image.IterateImagePixels((x, y) =>
             {
                 double red = 0;
                 double green = 0;
@@ -46,7 +46,7 @@ namespace lijohnttle.Media.Photo.Filters.Convolution
 
                 // sum each color component of the pixels within a window,
                 // multiplied by the filter matrix factor
-                image.IterateMatrixPixels(x, y, filterOffset, (matrixX, matrixY) =>
+                image.IterateMatrix(x, y, filterOffset, (matrixX, matrixY) =>
                 {
                     RgbColor color = image.GetPixel(matrixX, matrixY).AsRgbColor();
 
