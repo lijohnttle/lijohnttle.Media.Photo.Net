@@ -24,7 +24,7 @@
         
         <!-- Radius -->
 
-        <TextBlock Text="Radius" />
+        <TextBlock Text="Radius:" VerticalAlignment="Center" />
 
         <Grid Grid.Column="2">
             <Grid.ColumnDefinitions>
@@ -42,12 +42,12 @@
                 IsSnapToTickEnabled="True" />
 
             <TextBlock Grid.Column="2" Text="15" Visibility="Hidden" />
-            <TextBlock Grid.Column="2" Text="{Binding Radius}" />
+            <TextBlock Grid.Column="2" Text="{Binding Radius}" VerticalAlignment="Center" />
         </Grid>
 
         <!-- Algorithm -->
 
-        <TextBlock Grid.Row="2" Text="Algorithm" />
+        <TextBlock Grid.Row="2" Text="Algorithm:" VerticalAlignment="Center" />
 
         <ComboBox
             Grid.Column="2"
