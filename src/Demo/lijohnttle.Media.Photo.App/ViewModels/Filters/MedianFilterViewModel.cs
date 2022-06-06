@@ -16,8 +16,9 @@ namespace lijohnttle.Media.Photo.App.ViewModels.Filters
             {
                 new MedianFilterAlgorithmViewModel("Default", StandardMedianFilterAlgorithm.Default),
                 new MedianFilterAlgorithmViewModel("Huang", HuangMedianFilterAlgorithm.Default),
+                new MedianFilterAlgorithmViewModel("Histograms", HistogramsMedianFilterAhgorithm.Default),
             };
-            Algorithm = Algorithms[0];
+            Algorithm = Algorithms[2];
         }
 
 

@@ -1,5 +1,4 @@
 ﻿using lijohnttle.Media.Photo.Core;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace lijohnttle.Media.Photo.Filters.Median.Algorithms
@@ -14,24 +13,38 @@ namespace lijohnttle.Media.Photo.Filters.Median.Algorithms
             IImage result = new BitmapImage(source);
 
             // iterate every line of pixels of the image
-            Parallel.For(0, source.Height - 1, (currentY) =>
+            for(int currentY = 0; currentY <= source.Height - 1; currentY++)
             {
                 // find all pixels within a kernel
-                MedianFilterKernel kernel = new (source, options.Radius, 0, currentY);
+                MedianFilterKernel kernel = new(source, options.Radius, 0, currentY, options.PixelComparer);
 
                 do
                 {
-                    // sort pixels and take the median
-                    IColor medianPixel = kernel
-                        .GetPixels()
-                        .OrderBy(t => t, options.PixelComparer)
-                        .ElementAt(kernel.Count / 2);
+                    // take the median
+                    IColor medianPixel = kernel.FindMedianPixel();
 
                     result.SetPixel(kernel.PositionX, kernel.PositionY, medianPixel);
 
                     // move kernel
-                } while (kernel.MoveRight());
-            });
+                } while (kernel.MoveToNext());
+            };
+
+            //// iterate every line of pixels of the image
+            //Parallel.For(0, source.Height - 1, (currentY) =>
+            //{
+            //    // find all pixels within a kernel
+            //    MedianFilterKernel kernel = new(source, options.Radius, 0, currentY, options.PixelComparer);
+
+            //    do
+            //    {
+            //        // take the median
+            //        IColor medianPixel = kernel.FindMedianPixel();
+
+            //        result.SetPixel(kernel.PositionX, kernel.PositionY, medianPixel);
+
+            //        // move kernel
+            //    } while (kernel.MoveToNext());
+            //});
 
             return result;
         }

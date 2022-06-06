@@ -1,25 +1,28 @@
 ﻿using lijohnttle.Media.Photo.Core;
 using lijohnttle.Media.Photo.Filters.Tools;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace lijohnttle.Media.Photo.Filters
 {
+    /// <summary>
+    /// Represents a median filter kernel.
+    /// </summary>
     public class MedianFilterKernel : SquareKernel
     {
-        private readonly Queue<IColor> pixels = new Queue<IColor>();
+        private readonly Queue<RgbColor> pixels = new Queue<RgbColor>();
+        private readonly IComparer<IColor> pixelComparer;
 
-
-        public MedianFilterKernel(IImage image, int radius, int positionX, int positionY)
+        public MedianFilterKernel(IImage image, int radius, int positionX, int positionY, IComparer<IColor> pixelComparer)
             : base(image, radius, positionX, positionY)
         {
+            this.pixelComparer = pixelComparer;
+         
             MoveTo(positionX, positionY);
         }
 
 
-        public override int Count => pixels.Count;
-
-
-        public override IEnumerable<IColor> GetPixels() => pixels;
+        public override IEnumerable<RgbColor> GetPixels() => pixels;
 
         public override void MoveTo(int positionX, int positionY)
         {
@@ -30,13 +33,13 @@ namespace lijohnttle.Media.Photo.Filters
 
             UpdatePaddings();
 
-            foreach (IColor pixel in IterateColumnByColumn())
+            foreach (RgbColor pixel in IterateColumnByColumn())
             {
                 pixels.Enqueue(pixel);
             }
         }
 
-        public override bool MoveRight()
+        public override bool MoveToNext()
         {
             if (PositionX >= Image.Width - 1)
             {
@@ -58,16 +61,25 @@ namespace lijohnttle.Media.Photo.Filters
             return true;
         }
 
+        public RgbColor FindMedianPixel()
+        {
+
+
+            return pixels
+                .OrderBy(t => t, pixelComparer)
+                .ElementAt(pixels.Count / 2);
+        }
+
         /// <summary>
         /// Iterates all pixels in the kernel.
         /// </summary>
-        private IEnumerable<IColor> IterateColumnByColumn()
+        private IEnumerable<RgbColor> IterateColumnByColumn()
         {
             for (int windowX = Left; windowX <= Right; windowX++)
             {
                 for (int windowY = Top; windowY <= Bottom; windowY++)
                 {
-                    yield return Image.GetPixel(windowX, windowY);
+                    yield return Image.GetPixel(windowX, windowY).AsRgbColor();
                 }
             }
         }
@@ -86,7 +98,7 @@ namespace lijohnttle.Media.Photo.Filters
 
             for (int row = PositionY - TopPadding; row < PositionY + BottomPadding + 1; row++)
             {
-                pixels.Enqueue(Image.GetPixel(column, row));
+                pixels.Enqueue(Image.GetPixel(column, row).AsRgbColor());
             }
 
             return;

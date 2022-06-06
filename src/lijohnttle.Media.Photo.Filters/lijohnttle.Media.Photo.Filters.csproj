@@ -10,6 +10,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+      <_Parameter1>lijohnttle.Media.Photo.Filters.UnitTests</_Parameter1>
+    </AssemblyAttribute>
+  </ItemGroup>
+  
+  <ItemGroup>
     <ProjectReference Include="..\lijohnttle.Media.Photo.Core\lijohnttle.Media.Photo.Core.csproj" />
   </ItemGroup>
 

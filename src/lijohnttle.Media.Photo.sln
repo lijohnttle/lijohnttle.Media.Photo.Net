@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.32510.428
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32519.379
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "lijohnttle.Media.Photo.Core", "lijohnttle.Media.Photo.Core\lijohnttle.Media.Photo.Core.csproj", "{CBD5898A-CF1F-4713-B006-04CB3F4E563F}"
 EndProject
@@ -13,7 +13,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Demo", "Demo", "{9B7CB777-4
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "lijohnttle.Media.Photo.Filters", "lijohnttle.Media.Photo.Filters\lijohnttle.Media.Photo.Filters.csproj", "{8DDB54D5-CFE7-4A86-B07C-89089E9297CC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lijohnttle.Media.Photo.Wpf", "Demo\lijohnttle.Media.Photo.Wpf\lijohnttle.Media.Photo.Wpf.csproj", "{9864DCAB-9B7F-4FB6-B9B5-6E01AB388806}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "lijohnttle.Media.Photo.Wpf", "Demo\lijohnttle.Media.Photo.Wpf\lijohnttle.Media.Photo.Wpf.csproj", "{9864DCAB-9B7F-4FB6-B9B5-6E01AB388806}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lijohnttle.Media.Photo.Filters.UnitTests", "lijohnttle.Media.Photo.Filters.UnitTests\lijohnttle.Media.Photo.Filters.UnitTests.csproj", "{D867C680-62F9-48A2-8BE2-0983466D7EDE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,10 @@ Global
 		{9864DCAB-9B7F-4FB6-B9B5-6E01AB388806}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9864DCAB-9B7F-4FB6-B9B5-6E01AB388806}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9864DCAB-9B7F-4FB6-B9B5-6E01AB388806}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D867C680-62F9-48A2-8BE2-0983466D7EDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D867C680-62F9-48A2-8BE2-0983466D7EDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D867C680-62F9-48A2-8BE2-0983466D7EDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D867C680-62F9-48A2-8BE2-0983466D7EDE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
