@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace lijohnttle.Media.Photo.Filters.Median
 {
-    public class MedianFilterPixelComparer : IComparer<IColor>
+    public class MedianFilterPixelComparer : IComparer<RgbColor>
     {
         public static MedianFilterPixelComparer Default { get; } = new MedianFilterPixelComparer();
 
-        public int Compare(IColor x, IColor y)
+        public int Compare(RgbColor x, RgbColor y)
         {
             var xRgb = x.AsRgbColor();
             var yRgb = y.AsRgbColor();

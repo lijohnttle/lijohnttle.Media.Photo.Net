@@ -1,4 +1,6 @@
-﻿using System;
+﻿using lijohnttle.Media.Photo.Core;
+using System;
+using System.Collections.Generic;
 
 namespace lijohnttle.Media.Photo.Filters.Median
 {
@@ -7,14 +9,14 @@ namespace lijohnttle.Media.Photo.Filters.Median
     /// </summary>
     public class MedianFilterOptions
     {
-        private MedianFilterPixelComparer pixelComparer = MedianFilterPixelComparer.Default;
+        private IComparer<RgbColor> pixelComparer = MedianFilterPixelComparer.Default;
         private int radius = 3;
 
 
         /// <summary>
         /// A comparer that is used to compare pixels to select a median.
         /// </summary>
-        public MedianFilterPixelComparer PixelComparer
+        public IComparer<RgbColor> PixelComparer
         {
             get => pixelComparer;
             init => pixelComparer = value ?? MedianFilterPixelComparer.Default;

@@ -1,5 +1,4 @@
 ﻿using lijohnttle.Media.Photo.Core.Extensions;
-using lijohnttle.Media.Photo.Core.Internal;
 
 namespace lijohnttle.Media.Photo.Core
 {
@@ -22,19 +21,10 @@ namespace lijohnttle.Media.Photo.Core
 
         public int Height => data.GetLength(1);
 
-        public IColor GetPixel(int x, int y)
-        {
-            ImageVerificationHelper.VerifyXCoordinate(x, Width);
-            ImageVerificationHelper.VerifyYCoordinate(y, Height);
-
-            return data[x, y];
-        }
+        public IColor GetPixel(int x, int y) => data[x, y];
 
         public void SetPixel(int x, int y, IColor color)
         {
-            ImageVerificationHelper.VerifyXCoordinate(x, Width);
-            ImageVerificationHelper.VerifyYCoordinate(y, Height);
-
             data[x, y] = color.AsRgbColor();
         }
 

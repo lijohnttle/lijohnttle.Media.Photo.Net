@@ -28,16 +28,11 @@ namespace lijohnttle.Media.Photo.Filters.Tools
         /// </summary>
         public int PositionY { get; protected set; }
 
-        /// <summary>
-        /// Gets the number of pixels in the kernel.
-        /// </summary>
-        public abstract int Count { get; }
-
 
         /// <summary>
         /// Returns pixels of the kernel.
         /// </summary>
-        public abstract IEnumerable<IColor> GetPixels();
+        public abstract IEnumerable<RgbColor> GetPixels();
 
         /// <summary>
         /// Moves the kernel to another position.
@@ -47,6 +42,6 @@ namespace lijohnttle.Media.Photo.Filters.Tools
         /// <summary>
         /// Moves the kernel to the right.
         /// </summary>
-        public abstract bool MoveRight();
+        public abstract bool MoveToNext();
     }
 }
