@@ -1,4 +1,5 @@
 ﻿using lijohnttle.Media.Photo.Core;
+using lijohnttle.Media.Photo.Filters.Internal.Helpers;
 using lijohnttle.Media.Photo.Filters.Tools;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +12,14 @@ namespace lijohnttle.Media.Photo.Filters
     public class MedianFilterKernel : SquareKernel
     {
         private readonly Queue<RgbColor> pixels = new Queue<RgbColor>();
-        private readonly IComparer<IColor> pixelComparer;
+        private readonly IComparer<RgbColor> pixelComparer;
 
-        public MedianFilterKernel(IImage image, int radius, int positionX, int positionY, IComparer<IColor> pixelComparer)
+        public MedianFilterKernel(
+            IImage image,
+            int radius,
+            int positionX,
+            int positionY,
+            IComparer<RgbColor> pixelComparer)
             : base(image, radius, positionX, positionY)
         {
             this.pixelComparer = pixelComparer;
@@ -63,8 +69,6 @@ namespace lijohnttle.Media.Photo.Filters
 
         public RgbColor FindMedianPixel()
         {
-
-
             return pixels
                 .OrderBy(t => t, pixelComparer)
                 .ElementAt(pixels.Count / 2);

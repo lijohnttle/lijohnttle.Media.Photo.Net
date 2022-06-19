@@ -14,11 +14,10 @@ namespace lijohnttle.Media.Photo.App.ViewModels.Filters
             Radius = 3;
             Algorithms = new ObservableCollection<MedianFilterAlgorithmViewModel>
             {
-                new MedianFilterAlgorithmViewModel("Default", StandardMedianFilterAlgorithm.Default),
+                new MedianFilterAlgorithmViewModel("Standard", StandardMedianFilterAlgorithm.Default),
                 new MedianFilterAlgorithmViewModel("Huang", HuangMedianFilterAlgorithm.Default),
-                new MedianFilterAlgorithmViewModel("Histograms", HistogramsMedianFilterAhgorithm.Default),
             };
-            Algorithm = Algorithms[2];
+            Algorithm = Algorithms[Algorithms.Count - 1];
         }
 
 

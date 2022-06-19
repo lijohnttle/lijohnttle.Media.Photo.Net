@@ -13,7 +13,7 @@ namespace lijohnttle.Media.Photo.Filters.Median.Algorithms
             IImage result = new BitmapImage(source);
 
             // iterate every line of pixels of the image
-            for(int currentY = 0; currentY <= source.Height - 1; currentY++)
+            Parallel.For(0, source.Height - 1, (currentY) =>
             {
                 // find all pixels within a kernel
                 MedianFilterKernel kernel = new(source, options.Radius, 0, currentY, options.PixelComparer);
@@ -27,24 +27,7 @@ namespace lijohnttle.Media.Photo.Filters.Median.Algorithms
 
                     // move kernel
                 } while (kernel.MoveToNext());
-            };
-
-            //// iterate every line of pixels of the image
-            //Parallel.For(0, source.Height - 1, (currentY) =>
-            //{
-            //    // find all pixels within a kernel
-            //    MedianFilterKernel kernel = new(source, options.Radius, 0, currentY, options.PixelComparer);
-
-            //    do
-            //    {
-            //        // take the median
-            //        IColor medianPixel = kernel.FindMedianPixel();
-
-            //        result.SetPixel(kernel.PositionX, kernel.PositionY, medianPixel);
-
-            //        // move kernel
-            //    } while (kernel.MoveToNext());
-            //});
+            });
 
             return result;
         }
